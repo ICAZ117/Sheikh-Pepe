@@ -1,4 +1,4 @@
-package Main;
+package Main; 
 
 import Events.Terminate;
 import Events.Arabic;
