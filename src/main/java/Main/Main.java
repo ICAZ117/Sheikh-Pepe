@@ -1,11 +1,7 @@
 package Main;
 
-import Events.Terminate;
-import Events.Arabic;
-import Events.Salams;
-import Events.Verify;
-import Events.Help;
-import Events.Joke;
+import Events.*;
+import java.io.*;
 import java.util.*;
 import javax.security.auth.login.LoginException;
 import net.dv8tion.jda.api.*;
@@ -19,8 +15,12 @@ public class Main {
 	public static final long LOG_CHANNEL_ID = 887415187429265448L;
 	public static Guild SERVER;
 	public static TextChannel LOG_CHANNEL;
+	public static PrintWriter out;
 
-	public static void main(String[] args) throws LoginException, InterruptedException {
+	public static void main(String[] args) throws LoginException, InterruptedException, FileNotFoundException {
+		// Initialize PrintWriter for event logs
+		out = new PrintWriter(new File("EventLogs.out"));
+		
 		// Initialize JDA
 		JDA jda = JDABuilder.createDefault("Nzk5Mzg5NTk1NDk3NzkxNTAw.YAC3kw.RzHlpCOG96gR-XjOFwF6vCxH8Hs").setActivity(Activity.playing("Ultimate Thumb Wrestling 2021")).build();
 
@@ -32,22 +32,29 @@ public class Main {
 
 		// If server is null, print an error message and exit program.
 		if (SERVER == null) {
-			System.out.println("\n-------------- SERVER NOT FOUND -------------\n");
+			out.println("\n-------------- SERVER NOT FOUND -------------\n");
+			out.flush();
+			Main.out.close();
 			System.exit(0);
 		}
 		// Else, print server name
 		else {
-			System.out.printf("\n------------------ SUCCESS ------------------\n-> Found Server: %s\n-> Searching for dump channel...\n", SERVER.getName());
-
+			out.printf("\n------------------ SUCCESS ------------------\n-> Found Server: %s\n-> Searching for log channel...\n", SERVER.getName());
+			out.flush();
+			
 			// Get system log channel
 			LOG_CHANNEL = SERVER.getTextChannelById(LOG_CHANNEL_ID);
 
+			// Check if log channel is null
 			if (LOG_CHANNEL == null) {
-				System.out.println("\n----------- LOG CHANNEL NOT FOUND -----------\n");
+				out.println("\n----------- LOG CHANNEL NOT FOUND -----------\n");
+				out.flush();
+				Main.out.close();
 				System.exit(0);
 			}
 			else {
-				System.out.printf("-> Found log channel: %s\n", LOG_CHANNEL.getName());
+				out.printf("-> Found log channel: %s\n", LOG_CHANNEL.getName());
+				out.flush();
 				log("-> Connection status: ONLINE");
 				log("-> Loading modules...");
 				log("-> Initialization complete");
@@ -65,6 +72,8 @@ public class Main {
 	
 	public static void log(String message) {
 		LOG_CHANNEL.sendMessage(String.format("```%s```", message)).queue();
+		out.println(message);
+		out.flush();
 	}
 	
 	public static void dm(User user, String message) {

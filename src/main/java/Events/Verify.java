@@ -102,7 +102,6 @@ public class Verify extends ListenerAdapter {
 							}
 							else {
 								VERIFICATION_MAP.put(event.getAuthor().getIdLong(), new Submission());
-								System.out.println("Began verification for " + member.getUser().getName());
 								initDMVerification(member);
 
 								new Timer().schedule(new TimerTask() {
@@ -124,7 +123,8 @@ public class Verify extends ListenerAdapter {
 											Role unidentified = event.getGuild().getRoleById(767720948849311754L);
 
 											if (male == null || female == null || age13 == null || age14 == null || age15 == null || age16 == null || age17 == null || age18 == null || kayi == null || pasha == null || dj == null || unidentified == null) {
-												System.out.println("CANNOT FIND A ROLE, CANCELLING VERIFICATION");
+												Main.out.println("CANNOT FIND A ROLE, CANCELLING VERIFICATION");
+												Main.out.flush();
 												Main.dm(user, "My apologies, I seem to be encountering some sort of error. Please ping <@&794030971082375178> in <#767720553145958400> for assistance. Jazakallahu Khair!");
 												this.cancel();
 											}
@@ -183,27 +183,28 @@ public class Verify extends ListenerAdapter {
 
 												// Assign DJ role
 												event.getGuild().addRoleToMember(member, dj).queue();
-												
+
 												// Remove unidentified role
 												event.getGuild().removeRoleFromMember(member, unidentified).queue();
-												
+
 												// Search if name role already exists
 												List<Role> names = event.getGuild().getRolesByName(current.getFirstName() + " " + current.getLastName().charAt(0) + ".", true);
-												
+
 												// If it does, give it to the member
 												if (names.size() > 0) {
 													event.getGuild().addRoleToMember(member, names.get(0)).queue();
 												}
 												else {
 													event.getGuild().createRole().setName(current.getFirstName() + " " + current.getLastName().charAt(0) + ".").queue();
-													
-													while (event.getGuild().getRolesByName(current.getFirstName() + " " + current.getLastName().charAt(0) + ".", true).size() <= 0) {														
+
+													while (event.getGuild().getRolesByName(current.getFirstName() + " " + current.getLastName().charAt(0) + ".", true).size() <= 0) {
 													}
-													
+
 													List<Role> newNameList = event.getGuild().getRolesByName(current.getFirstName() + " " + current.getLastName().charAt(0) + ".", true);
-													
-													System.out.println(newNameList.get(0).getName());
-													
+
+													Main.out.println("New role: " + newNameList.get(0).getName());
+													Main.out.flush();
+
 													Role newName = newNameList.get(0);
 													event.getGuild().modifyRolePositions().selectPosition(newName).moveTo(event.getGuild().modifyRolePositions().selectPosition(age18).getSelectedPosition()).queue();
 													event.getGuild().addRoleToMember(member, newName).queue();
@@ -228,80 +229,69 @@ public class Verify extends ListenerAdapter {
 	public void initDMVerification(Member member) {
 		User user = member.getUser();
 
+		// First Name
 		Main.dm(user, "Assalamu3alaykum Warahmatullahi Wabarakatuh!\nWelcome to Muslim Gang!\nI am the official Muslim Gang bot, and I will be assisting you with registration and verification today insha'Allah\nTo begin, please enter your first name:");
 
+		// Last Name
 		new Timer().schedule(new TimerTask() {
 			@Override
 			public void run() {
 				if (VERIFICATION_MAP.get(member.getIdLong()).getProgress() == 1) {
-					// They have to have entered a name
-//                    member.getGuild().addRoleToMember(member.getIdLong(), member.getGuild().getRoleById());
-					System.out.println(VERIFICATION_MAP.get(member.getIdLong()).getFirstName());
 					Main.dm(user, "Alright, now please enter your last name:");
 					this.cancel();
 				}
 			}
 		}, 100, 100);
 
+		// Age
 		new Timer().schedule(new TimerTask() {
 			@Override
 			public void run() {
 				if (VERIFICATION_MAP.get(member.getIdLong()).getProgress() == 2) {
-					// They have to have entered a name
-//                    member.getGuild().addRoleToMember(member.getIdLong(), member.getGuild().getRoleById());
-					System.out.println(VERIFICATION_MAP.get(member.getIdLong()).getLastName());
 					Main.dm(user, "Jazakallahu Khair. How old are you?");
 					this.cancel();
 				}
 			}
 		}, 100, 100);
 
+		// Gender
 		new Timer().schedule(new TimerTask() {
 			@Override
 			public void run() {
 				if (VERIFICATION_MAP.get(member.getIdLong()).getProgress() == 3) {
-					// They have to have entered a name
-//                    member.getGuild().addRoleToMember(member.getIdLong(), member.getGuild().getRoleById());
-					System.out.println(VERIFICATION_MAP.get(member.getIdLong()).getAge());
 					Main.dm(user, "Cool. Are you male or female?");
 					this.cancel();
 				}
 			}
 		}, 100, 100);
 
+		// Kayi
 		new Timer().schedule(new TimerTask() {
 			@Override
 			public void run() {
 				if (VERIFICATION_MAP.get(member.getIdLong()).getProgress() == 4) {
-					// They have to have entered a name
-//                    member.getGuild().addRoleToMember(member.getIdLong(), member.getGuild().getRoleById());
-					System.out.println(VERIFICATION_MAP.get(member.getIdLong()).getGender());
 					Main.dm(user, "Awesome, have you seen Dirilis Ertugrul and/or Kurulus Osman?");
 					this.cancel();
 				}
 			}
 		}, 100, 100);
 
+		// Pasha
 		new Timer().schedule(new TimerTask() {
 			@Override
 			public void run() {
 				if (VERIFICATION_MAP.get(member.getIdLong()).getProgress() == 5) {
-					// They have to have entered a name
-//                    member.getGuild().addRoleToMember(member.getIdLong(), member.getGuild().getRoleById());
-					System.out.println(VERIFICATION_MAP.get(member.getIdLong()).getSeenErtugrul());
 					Main.dm(user, "Perfect, last question, I promise. Have you seen Payitaht Abdulhamid?");
 					this.cancel();
 				}
 			}
 		}, 100, 100);
 
+		// Complete
 		new Timer().schedule(new TimerTask() {
 			@Override
 			public void run() {
 				if (VERIFICATION_MAP.get(member.getIdLong()).getProgress() == 6) {
-					// They have to have entered a name
-//                    member.getGuild().addRoleToMember(member.getIdLong(), member.getGuild().getRoleById());
-					System.out.println(VERIFICATION_MAP.get(member.getIdLong()).getSeenPayitaht());
 					Main.dm(user, "Alright, that's it! Jazakallahu Khair for your cooperation! Welcome to Muslim Gang!!");
 
 					Submission current = VERIFICATION_MAP.get(member.getIdLong());
@@ -316,64 +306,65 @@ public class Verify extends ListenerAdapter {
 
 	@Override
 	public void onPrivateMessageReceived(final PrivateMessageReceivedEvent event) {
-//		super.onPrivateMessageReceived(event);
 		if (VERIFICATION_MAP.containsKey(event.getAuthor().getIdLong())) {
 			String content = event.getMessage().getContentRaw();
-			switch (VERIFICATION_MAP.get(event.getAuthor().getIdLong()).getProgress()) {
-				case 0:
-					VERIFICATION_MAP.get(event.getAuthor().getIdLong()).setFirstName(content);
-					VERIFICATION_MAP.get(event.getAuthor().getIdLong()).incrementProgress();
-					break;
-				case 1:
-					VERIFICATION_MAP.get(event.getAuthor().getIdLong()).setLastName(content);
-					VERIFICATION_MAP.get(event.getAuthor().getIdLong()).incrementProgress();
-					break;
-				case 2:
-					int age;
-					try {
-						age = Integer.parseInt(content);
-					} catch (Exception e) {
-						Main.dm(event.getAuthor(), "Invalid reponse. Please enter an integer number.");
-						break;
-					}
-					VERIFICATION_MAP.get(event.getAuthor().getIdLong()).setAge(age);
-					VERIFICATION_MAP.get(event.getAuthor().getIdLong()).incrementProgress();
-					break;
-				case 3:
-					if (content.equalsIgnoreCase("male")) {
-						content = "male";
-					}
-					else if (content.equalsIgnoreCase("female")) {
-						content = "female";
-					}
-					else {
-						Main.dm(event.getAuthor(), "Invalid reponse. Please select either male or female.");
-						break;
-					}
-					VERIFICATION_MAP.get(event.getAuthor().getIdLong()).setGender(content);
-					VERIFICATION_MAP.get(event.getAuthor().getIdLong()).incrementProgress();
-					break;
-				case 4:
-					if (!content.equalsIgnoreCase("yes") && !content.equalsIgnoreCase("no")) {
-						Main.dm(event.getAuthor(), "Invalid reponse. Please respond with either yes or no.");
-						break;
-					}
-					VERIFICATION_MAP.get(event.getAuthor().getIdLong()).setSeenErtugrul(content.equalsIgnoreCase("yes"));
-					VERIFICATION_MAP.get(event.getAuthor().getIdLong()).incrementProgress();
-					break;
-				case 5:
-					if (!content.equalsIgnoreCase("yes") && !content.equalsIgnoreCase("no")) {
-						Main.dm(event.getAuthor(), "Invalid reponse. Please respond with either yes or no.");
-						break;
-					}
-					VERIFICATION_MAP.get(event.getAuthor().getIdLong()).setSeenPayitaht(content.equalsIgnoreCase("yes"));
-					VERIFICATION_MAP.get(event.getAuthor().getIdLong()).incrementProgress();
-					break;
-				default:
-					Main.dm(event.getAuthor(), "My dude. I'm a bot. Why are you DMing me?? smh <:CS_pepeFacepalm:734834180604559490>");
-					Main.dm(event.getAuthor(), "https://tenor.com/view/discord-ping-gif-20120886");
-			}
+			if (content.length() != 0) {
 
+				switch (VERIFICATION_MAP.get(event.getAuthor().getIdLong()).getProgress()) {
+					case 0:
+						VERIFICATION_MAP.get(event.getAuthor().getIdLong()).setFirstName(content);
+						VERIFICATION_MAP.get(event.getAuthor().getIdLong()).incrementProgress();
+						break;
+					case 1:
+						VERIFICATION_MAP.get(event.getAuthor().getIdLong()).setLastName(content);
+						VERIFICATION_MAP.get(event.getAuthor().getIdLong()).incrementProgress();
+						break;
+					case 2:
+						int age;
+						try {
+							age = Integer.parseInt(content);
+						} catch (Exception e) {
+							Main.dm(event.getAuthor(), "Invalid reponse. Please enter an integer number.");
+							break;
+						}
+						VERIFICATION_MAP.get(event.getAuthor().getIdLong()).setAge(age);
+						VERIFICATION_MAP.get(event.getAuthor().getIdLong()).incrementProgress();
+						break;
+					case 3:
+						if (content.equalsIgnoreCase("male")) {
+							content = "male";
+						}
+						else if (content.equalsIgnoreCase("female")) {
+							content = "female";
+						}
+						else {
+							Main.dm(event.getAuthor(), "Invalid reponse. Please select either male or female.");
+							break;
+						}
+						VERIFICATION_MAP.get(event.getAuthor().getIdLong()).setGender(content);
+						VERIFICATION_MAP.get(event.getAuthor().getIdLong()).incrementProgress();
+						break;
+					case 4:
+						if (!content.equalsIgnoreCase("yes") && !content.equalsIgnoreCase("no")) {
+							Main.dm(event.getAuthor(), "Invalid reponse. Please respond with either yes or no.");
+							break;
+						}
+						VERIFICATION_MAP.get(event.getAuthor().getIdLong()).setSeenErtugrul(content.equalsIgnoreCase("yes"));
+						VERIFICATION_MAP.get(event.getAuthor().getIdLong()).incrementProgress();
+						break;
+					case 5:
+						if (!content.equalsIgnoreCase("yes") && !content.equalsIgnoreCase("no")) {
+							Main.dm(event.getAuthor(), "Invalid reponse. Please respond with either yes or no.");
+							break;
+						}
+						VERIFICATION_MAP.get(event.getAuthor().getIdLong()).setSeenPayitaht(content.equalsIgnoreCase("yes"));
+						VERIFICATION_MAP.get(event.getAuthor().getIdLong()).incrementProgress();
+						break;
+					default:
+						Main.dm(event.getAuthor(), "My dude. I'm a bot. Why are you DMing me?? smh <:coolthonk:791626203273756673>");
+						Main.dm(event.getAuthor(), "https://tenor.com/view/discord-ping-gif-20120886");
+				}
+			}
 		}
 		else {
 			try {
