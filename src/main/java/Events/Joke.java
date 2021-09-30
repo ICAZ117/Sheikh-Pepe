@@ -108,10 +108,18 @@ public class Joke extends ListenerAdapter {
 	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
 		String messageSent = event.getMessage().getContentRaw();
 
-		if (messageSent.equals(Main.PREFIX + "joke")) {
+		if (messageSent.startsWith(Main.PREFIX + "joke")) {
 			Main.log("-> Command \">joke\" executed by " + event.getAuthor().getName());
-			
+
 			int jokeIndex = (int) ((Math.random() * 100000) % jokes.length);
+
+			if (messageSent.split(" ").length == 2) {
+				try {
+					jokeIndex = (Integer.parseInt(messageSent.split(" ")[1]) < jokes.length) ? Integer.parseInt(messageSent.split(" ")[1]) : jokeIndex;
+				} catch (Exception e) {
+				}
+			}
+			
 
 			// Build embed
 			EmbedBuilder eb = new EmbedBuilder();
@@ -124,7 +132,7 @@ public class Joke extends ListenerAdapter {
 
 			// Tell the actual joke
 			eb.setDescription(jokes[jokeIndex]);
-			
+
 			// Print joke index in embed footer
 			eb.setFooter("Joke index: " + jokeIndex);
 

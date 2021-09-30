@@ -10,7 +10,7 @@ public class Terminate extends ListenerAdapter {
 	public void onMessageReceived(MessageReceivedEvent event) {
 		String messageSent = event.getMessage().getContentRaw();
 
-		if (messageSent.equals(Main.PREFIX + "terminate") && event.getAuthor().getId().equals("390633990312427520")) {
+		if (messageSent.equalsIgnoreCase(Main.PREFIX + "terminate") && event.getAuthor().getId().equals("390633990312427520")) {
 			Main.log("-> Terminating program execution\n\n");
 			try {
 				Thread.sleep(500);
