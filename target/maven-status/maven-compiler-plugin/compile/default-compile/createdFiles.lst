@@ -10,6 +10,7 @@ Events\Terminate.class
 Events\Joke.class
 Events\Verify$5.class
 Events\Verify$6.class
+Events\Ping.class
 Dependencies\ReadFromSheet.class
 Dependencies\Submission.class
 Events\Arabic.class

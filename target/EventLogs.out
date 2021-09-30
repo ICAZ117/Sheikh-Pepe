@@ -8,3 +8,26 @@
 -> Initialization complete
 -> Command ">help" executed by ICAZ117
 -> Command ">help" executed by ICAZ117
+-> Command ">verify" executed by Nishan
+-> Command ">verify" executed by Nishan
+-> Verification complete for user: Nishan
+   First Name: Muhammed
+   Last name: Nishan
+   Age: 16
+   Gender: male
+   Seen Ertugrul/Osman: false
+   Seen Payitaht: false
+New role: Muhammed N.
+-> Command ">verify" executed by NAUFAL2511
+-> Command ">verify" executed by NAUFAL2511
+-> Verification complete for user: NAUFAL2511
+   First Name: Mohamed Naufal
+   Last name: A
+   Age: 18
+   Gender: male
+   Seen Ertugrul/Osman: false
+   Seen Payitaht: false
+New role: Mohamed Naufal A.
+-> Terminating program execution
+
+
