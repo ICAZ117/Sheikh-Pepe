@@ -33,6 +33,7 @@ public class Help extends ListenerAdapter {
 			eb.addField("verify", "Registers you as an official member of Muslim Gang!", false);
 			eb.addField("arabic", "Shows a list of common arabic phrases for easy copy-pasting", false);
 			eb.addField("joke", "Gives you an extremely cringey (most of the time) joke!", false);
+			eb.addField("ping", "Returns a RestAction ping between the bot and the Discord servers", false);
 			
 			// Set footer
 			eb.setFooter("Prefix: >");
