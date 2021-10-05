@@ -5,3 +5,4 @@ ibi.in
 /target/EventLogs.out
 /target/token.txt
 /target/ibi.in
+/src/main/resources/credentials.json
