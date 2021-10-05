@@ -1,5 +1,7 @@
 token.txt
-/target/EventLogs.out
 EventLogs.out
 ibi.in
 /target/classes/Main/Main.class
+/target/EventLogs.out
+/target/token.txt
+/target/ibi.in
