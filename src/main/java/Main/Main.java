@@ -6,7 +6,6 @@ import java.util.*;
 import javax.security.auth.login.LoginException;
 import net.dv8tion.jda.api.*;
 import net.dv8tion.jda.api.entities.*;
-import net.dv8tion.jda.api.requests.restaction.*;
 
 public class Main {
 
@@ -16,13 +15,14 @@ public class Main {
 	public static Guild SERVER;
 	public static TextChannel LOG_CHANNEL;
 	public static PrintWriter out;
+	public static HashSet<String> IBIs = new HashSet<>();
 
 	public static void main(String[] args) throws LoginException, InterruptedException, FileNotFoundException {
 		// Initialize PrintWriter for event logs
 		out = new PrintWriter(new File("EventLogs.out"));
 		
 		// Initialize JDA
-		JDA jda = JDABuilder.createDefault("Nzk5Mzg5NTk1NDk3NzkxNTAw.YAC3kw.RzHlpCOG96gR-XjOFwF6vCxH8Hs").setActivity(Activity.playing("Ultimate Thumb Wrestling 2021")).build();
+		JDA jda = JDABuilder.createDefault(new Scanner(new File("token.txt")).nextLine()).setActivity(Activity.playing("Ultimate Thumb Wrestling 2021")).build();
 
 		// Await completion of connection to Discord servers
 		jda.awaitReady();
@@ -57,6 +57,13 @@ public class Main {
 				out.flush();
 				log("-> Connection status: ONLINE");
 				log("-> Loading modules...");
+				
+				Scanner in = new Scanner(new File("ibi.in"));
+				
+				while (in.hasNext()) {
+					IBIs.add(in.next());
+				}
+				
 				log("-> Initialization complete");
 			}
 		}
