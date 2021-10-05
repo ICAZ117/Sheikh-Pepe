@@ -16,6 +16,7 @@ public class Main {
 	public static TextChannel LOG_CHANNEL;
 	public static PrintWriter out;
 	public static HashSet<String> IBIs = new HashSet<>();
+	public static HashSet<Long> admins = new HashSet<>();
 
 	public static void main(String[] args) throws LoginException, InterruptedException, FileNotFoundException {
 		// Initialize PrintWriter for event logs
@@ -63,6 +64,9 @@ public class Main {
 				while (in.hasNext()) {
 					IBIs.add(in.next());
 				}
+				
+				admins.add(390633990312427520L);
+				admins.add(384665051333656577L);
 				
 				log("-> Initialization complete");
 			}

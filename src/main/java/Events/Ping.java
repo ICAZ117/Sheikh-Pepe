@@ -22,14 +22,15 @@ public class Ping extends ListenerAdapter {
 			// Set embed color
 			eb.setColor(new Color((float) Math.random(), (float) Math.random(), (float) Math.random()));
 
-			event.getJDA().getRestPing().queue((time)
-					-> event.getChannel().sendMessage(eb.setDescription("Ping: " + time + "ms").build()).queue()
-			);
+			try {
+				event.getJDA().getRestPing().queue((time) -> {
+					eb.setDescription("Ping: " + time + "ms");
+					MessageEmbed embed = eb.build();
 
-			// Create embed
-			MessageEmbed embed = eb.build();
-
-			event.getChannel().sendMessage(embed).queue();
+					event.getChannel().sendMessage(embed).queue();
+				});
+			} catch (Exception e) {
+			}
 		}
 	}
 }
