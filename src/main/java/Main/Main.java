@@ -79,6 +79,7 @@ public class Main {
 		jda.addEventListener(new Salams());
 		jda.addEventListener(new Joke());
 		jda.addEventListener(new Ping());
+		jda.addEventListener(new Host());
 		jda.addEventListener(new Terminate());
 	}
 	
