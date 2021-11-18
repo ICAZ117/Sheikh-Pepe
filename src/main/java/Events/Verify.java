@@ -242,7 +242,7 @@ public class Verify extends ListenerAdapter {
 		canDM = true;
 		inverted = false;
 		user.openPrivateChannel()
-				.flatMap(channel -> channel.sendMessage("Testing"))
+				.flatMap(channel -> channel.sendMessage("Assalamu3alaykum Warahmatullahi Wabarakatuh!\n"))
 				.delay(Duration.ofSeconds(30))
 				.flatMap(Message::delete) // delete after 30 seconds
 				.queue(null, new ErrorHandler()
