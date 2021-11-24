@@ -6,7 +6,31 @@
 -> Connection status: ONLINE
 -> Loading modules...
 -> Initialization complete
--> Command ">host" executed by ICAZ117
--> Terminating program execution
-
-
+-> Command ">verify" executed by Shams
+-> Command ">verify" executed by Shams
+-> Verification complete for user: Shams
+   First Name: shams
+   Last name: shams
+   Age: 17
+   Gender: male
+   Seen Ertugrul/Osman: false
+   Seen Payitaht: false
+New role: shams s.
+-> Command ">verify" executed by Muslim Gang Test Bot
+-> Command ">verify" executed by Muslim Gang Test Bot
+-> Command ">verify" executed by Muslim Gang Test Bot
+-> Verification complete for user: Muslim Gang Test Bot
+   First Name: Ibraheem
+   Last name: Cazalas
+   Age: 16
+   Gender: male
+   Seen Ertugrul/Osman: true
+   Seen Payitaht: true
+-> Command ">verify" executed by Isaaqo
+-> Verification complete for user: Isaaqo
+   First Name: Abdullah
+   Last name: Ali
+   Age: 14
+   Gender: male
+   Seen Ertugrul/Osman: false
+   Seen Payitaht: false

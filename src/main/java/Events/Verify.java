@@ -107,17 +107,33 @@ public class Verify extends ListenerAdapter {
 								Main.dm(user, "Oy, over here. Can we continue now pls??");
 							}
 							else {
+								// If DMs are closed, print an error message
 								if (!canDM(event.getAuthor(), event)) {
 									event.getChannel().sendMessage("Unfortunately, your DMs are closed, meaning that I cannot verify you. Please follow the instructions in <#910678638654029835>, and then try again.").queue();
 								}
+								// ELSE. If execution reaches this point, that 
+								// means that the user in not yet verified, they
+								// have accepted the rules, they have not 
+								// started their verification, AND their DMs are
+								// open. Therefore, we need to verify them!
 								else {
+									// Add them to the verification list
 									VERIFICATION_MAP.put(event.getAuthor().getIdLong(), new Submission());
+									
+									// Initiate DM verification for the user. 
+									// This is the stage in which the bot DMs
+									// the user and gets all of their info.
 									initDMVerification(member);
 
+									// Once they have completed DM verification,
+									// it's time to give them their roles.
 									new Timer().schedule(new TimerTask() {
 										@Override
 										public void run() {
-											if (VERIFICATION_MAP.get(member.getIdLong()).getProgress() == 6) {
+											// Confirm that the user has 
+											// completed verification
+											if (VERIFICATION_MAP.get(member.getIdLong()).getProgress() == 10) {
+												// Get all roles
 												Submission current = VERIFICATION_MAP.get(member.getIdLong());
 												Role male = event.getGuild().getRoleById(816758517305573406L);
 												Role female = event.getGuild().getRoleById(818182649612337242L);
@@ -132,12 +148,16 @@ public class Verify extends ListenerAdapter {
 												Role dj = event.getGuild().getRoleById(767404002647343124L);
 												Role unidentified = event.getGuild().getRoleById(767720948849311754L);
 
+												// If the bot is unable to get 
+												// any of the roles, print an
+												// error message
 												if (male == null || female == null || age13 == null || age14 == null || age15 == null || age16 == null || age17 == null || age18 == null || kayi == null || pasha == null || dj == null || unidentified == null) {
 													Main.out.println("CANNOT FIND A ROLE, CANCELLING VERIFICATION");
 													Main.out.flush();
 													Main.dm(user, "My apologies, I seem to be encountering some sort of error. Please ping <@&794030971082375178> in <#767720553145958400> for assistance. Jazakallahu Khair!");
 													this.cancel();
 												}
+												// Else, give the user their roles
 												else {
 													// First give them their gender role
 													if (current.getGender().equalsIgnoreCase("male")) {
@@ -272,14 +292,47 @@ public class Verify extends ListenerAdapter {
 		User user = member.getUser();
 
 		// First Name
-		Main.dm(user, "Welcome to Muslim Gang!\nI am the official Muslim Gang bot, and I will be assisting you with registration and verification today insha'Allah\nTo begin, please enter your first name:");
+		Main.dm(user, "Welcome to Muslim Gang!\nI am the official Muslim Gang bot, and I will be assisting you with registration and verification today insha'Allah\n");
 
-		// Last Name
+		// First Name
+		new Timer().schedule(new TimerTask() {
+			@Override
+			public void run() {
+				if (VERIFICATION_MAP.get(member.getIdLong()).getProgress() == 0) {
+					Main.dm(user, "To begin, please enter your first name:");
+					this.cancel();
+				}
+			}
+		}, 100, 100);
+		
+		// Confirm first Name
 		new Timer().schedule(new TimerTask() {
 			@Override
 			public void run() {
 				if (VERIFICATION_MAP.get(member.getIdLong()).getProgress() == 1) {
+					Main.dm(user, String.format("You entered: %s\nIs this correct?", VERIFICATION_MAP.get(member.getIdLong()).getFirstName()));
+					this.cancel();
+				}
+			}
+		}, 100, 100);
+		
+		// Last Name
+		new Timer().schedule(new TimerTask() {
+			@Override
+			public void run() {
+				if (VERIFICATION_MAP.get(member.getIdLong()).getProgress() == 2) {
 					Main.dm(user, "Alright, now please enter your last name:");
+					this.cancel();
+				}
+			}
+		}, 100, 100);
+		
+		// Confirm last Name
+		new Timer().schedule(new TimerTask() {
+			@Override
+			public void run() {
+				if (VERIFICATION_MAP.get(member.getIdLong()).getProgress() == 3) {
+					Main.dm(user, String.format("You entered: %s\nIs this correct?", VERIFICATION_MAP.get(member.getIdLong()).getLastName()));
 					this.cancel();
 				}
 			}
@@ -289,8 +342,19 @@ public class Verify extends ListenerAdapter {
 		new Timer().schedule(new TimerTask() {
 			@Override
 			public void run() {
-				if (VERIFICATION_MAP.get(member.getIdLong()).getProgress() == 2) {
+				if (VERIFICATION_MAP.get(member.getIdLong()).getProgress() == 4) {
 					Main.dm(user, "Jazakallahu Khair. How old are you?");
+					this.cancel();
+				}
+			}
+		}, 100, 100);
+		
+		// Confirm age
+		new Timer().schedule(new TimerTask() {
+			@Override
+			public void run() {
+				if (VERIFICATION_MAP.get(member.getIdLong()).getProgress() == 5) {
+					Main.dm(user, String.format("You entered: %d\nIs this correct?", VERIFICATION_MAP.get(member.getIdLong()).getAge()));
 					this.cancel();
 				}
 			}
@@ -300,18 +364,29 @@ public class Verify extends ListenerAdapter {
 		new Timer().schedule(new TimerTask() {
 			@Override
 			public void run() {
-				if (VERIFICATION_MAP.get(member.getIdLong()).getProgress() == 3) {
+				if (VERIFICATION_MAP.get(member.getIdLong()).getProgress() == 6) { // OVER HERE FIX THIS
 					Main.dm(user, "Cool. Are you male or female?");
 					this.cancel();
 				}
 			}
 		}, 100, 100);
-
+		
+		// Confirm Gender
+		new Timer().schedule(new TimerTask() {
+			@Override
+			public void run() {
+				if (VERIFICATION_MAP.get(member.getIdLong()).getProgress() == 7) {
+					Main.dm(user, String.format("You entered: %s\nIs this correct?", VERIFICATION_MAP.get(member.getIdLong()).getGender()));
+					this.cancel();
+				}
+			}
+		}, 100, 100);
+		
 		// Kayi
 		new Timer().schedule(new TimerTask() {
 			@Override
 			public void run() {
-				if (VERIFICATION_MAP.get(member.getIdLong()).getProgress() == 4) {
+				if (VERIFICATION_MAP.get(member.getIdLong()).getProgress() == 8) {
 					Main.dm(user, "Awesome, have you seen Dirilis Ertugrul and/or Kurulus Osman?");
 					this.cancel();
 				}
@@ -322,7 +397,7 @@ public class Verify extends ListenerAdapter {
 		new Timer().schedule(new TimerTask() {
 			@Override
 			public void run() {
-				if (VERIFICATION_MAP.get(member.getIdLong()).getProgress() == 5) {
+				if (VERIFICATION_MAP.get(member.getIdLong()).getProgress() == 9) {
 					Main.dm(user, "Perfect, last question, I promise. Have you seen Payitaht Abdulhamid?");
 					this.cancel();
 				}
@@ -333,7 +408,7 @@ public class Verify extends ListenerAdapter {
 		new Timer().schedule(new TimerTask() {
 			@Override
 			public void run() {
-				if (VERIFICATION_MAP.get(member.getIdLong()).getProgress() == 6) {
+				if (VERIFICATION_MAP.get(member.getIdLong()).getProgress() == 10) {
 					Main.dm(user, "Alright, that's it! Jazakallahu Khair for your cooperation! Welcome to Muslim Gang!!");
 
 					Submission current = VERIFICATION_MAP.get(member.getIdLong());
@@ -353,15 +428,54 @@ public class Verify extends ListenerAdapter {
 			if (content.length() != 0) {
 
 				switch (VERIFICATION_MAP.get(event.getAuthor().getIdLong()).getProgress()) {
-					case 0:
+					// First name
+					case 0: // First name
 						VERIFICATION_MAP.get(event.getAuthor().getIdLong()).setFirstName(content);
 						VERIFICATION_MAP.get(event.getAuthor().getIdLong()).incrementProgress();
 						break;
+						
+					// Confirm first name
 					case 1:
+						// If they didn't answer yes or no, print error
+						if (!content.equalsIgnoreCase("yes") && !content.equalsIgnoreCase("no")) {
+							Main.dm(event.getAuthor(), "Invalid reponse. Please respond with either yes or no.");
+							break;
+						}
+						// If they entered yes, increment progress
+						else if (content.equalsIgnoreCase("yes")) {
+							VERIFICATION_MAP.get(event.getAuthor().getIdLong()).incrementProgress();
+						}
+						// If they entered no, decrement progress
+						else if (content.equalsIgnoreCase("no")) {
+							VERIFICATION_MAP.get(event.getAuthor().getIdLong()).decrementProgress();
+						}
+						break;
+						
+					// Last name
+					case 2:
 						VERIFICATION_MAP.get(event.getAuthor().getIdLong()).setLastName(content);
 						VERIFICATION_MAP.get(event.getAuthor().getIdLong()).incrementProgress();
 						break;
-					case 2:
+						
+					// Confirm last name
+					case 3:
+						// If they didn't answer yes or no, print error
+						if (!content.equalsIgnoreCase("yes") && !content.equalsIgnoreCase("no")) {
+							Main.dm(event.getAuthor(), "Invalid reponse. Please respond with either yes or no.");
+							break;
+						}
+						// If they entered yes, increment progress
+						else if (content.equalsIgnoreCase("yes")) {
+							VERIFICATION_MAP.get(event.getAuthor().getIdLong()).incrementProgress();
+						}
+						// If they entered no, decrement progress
+						else if (content.equalsIgnoreCase("no")) {
+							VERIFICATION_MAP.get(event.getAuthor().getIdLong()).decrementProgress();
+						}
+						break;
+						
+					// Age
+					case 4:
 						int age;
 						try {
 							age = Integer.parseInt(content);
@@ -372,7 +486,26 @@ public class Verify extends ListenerAdapter {
 						VERIFICATION_MAP.get(event.getAuthor().getIdLong()).setAge(age);
 						VERIFICATION_MAP.get(event.getAuthor().getIdLong()).incrementProgress();
 						break;
-					case 3:
+						
+					// Confirm age
+					case 5:
+						// If they didn't answer yes or no, print error
+						if (!content.equalsIgnoreCase("yes") && !content.equalsIgnoreCase("no")) {
+							Main.dm(event.getAuthor(), "Invalid reponse. Please respond with either yes or no.");
+							break;
+						}
+						// If they entered yes, increment progress
+						else if (content.equalsIgnoreCase("yes")) {
+							VERIFICATION_MAP.get(event.getAuthor().getIdLong()).incrementProgress();
+						}
+						// If they entered no, decrement progress
+						else if (content.equalsIgnoreCase("no")) {
+							VERIFICATION_MAP.get(event.getAuthor().getIdLong()).decrementProgress();
+						}
+						break;
+						
+					// Gender
+					case 6:
 						if (content.equalsIgnoreCase("male")) {
 							content = "male";
 						}
@@ -386,7 +519,26 @@ public class Verify extends ListenerAdapter {
 						VERIFICATION_MAP.get(event.getAuthor().getIdLong()).setGender(content);
 						VERIFICATION_MAP.get(event.getAuthor().getIdLong()).incrementProgress();
 						break;
-					case 4:
+						
+					// Confirm gender
+					case 7:
+						// If they didn't answer yes or no, print error
+						if (!content.equalsIgnoreCase("yes") && !content.equalsIgnoreCase("no")) {
+							Main.dm(event.getAuthor(), "Invalid reponse. Please respond with either yes or no.");
+							break;
+						}
+						// If they entered yes, increment progress
+						else if (content.equalsIgnoreCase("yes")) {
+							VERIFICATION_MAP.get(event.getAuthor().getIdLong()).incrementProgress();
+						}
+						// If they entered no, decrement progress
+						else if (content.equalsIgnoreCase("no")) {
+							VERIFICATION_MAP.get(event.getAuthor().getIdLong()).decrementProgress();
+						}
+						break;
+						
+					// Seen ertugrul
+					case 8:
 						if (!content.equalsIgnoreCase("yes") && !content.equalsIgnoreCase("no")) {
 							Main.dm(event.getAuthor(), "Invalid reponse. Please respond with either yes or no.");
 							break;
@@ -394,7 +546,9 @@ public class Verify extends ListenerAdapter {
 						VERIFICATION_MAP.get(event.getAuthor().getIdLong()).setSeenErtugrul(content.equalsIgnoreCase("yes"));
 						VERIFICATION_MAP.get(event.getAuthor().getIdLong()).incrementProgress();
 						break;
-					case 5:
+						
+					// Seen payitaht
+					case 9:
 						if (!content.equalsIgnoreCase("yes") && !content.equalsIgnoreCase("no")) {
 							Main.dm(event.getAuthor(), "Invalid reponse. Please respond with either yes or no.");
 							break;
@@ -402,6 +556,8 @@ public class Verify extends ListenerAdapter {
 						VERIFICATION_MAP.get(event.getAuthor().getIdLong()).setSeenPayitaht(content.equalsIgnoreCase("yes"));
 						VERIFICATION_MAP.get(event.getAuthor().getIdLong()).incrementProgress();
 						break;
+						
+					// Bruh
 					default:
 						Main.dm(event.getAuthor(), "My dude. I'm a bot. Why are you DMing me?? smh <:coolthonk:791626203273756673>");
 						Main.dm(event.getAuthor(), "https://tenor.com/view/discord-ping-gif-20120886");
@@ -409,6 +565,7 @@ public class Verify extends ListenerAdapter {
 			}
 		}
 		else {
+			// Also bruh
 			try {
 				Main.dm(event.getAuthor(), "Smh. My dude. I'm a bot. Why are you DMing me?? <:coolthonk:791626203273756673>");
 				Main.dm(event.getAuthor(), "https://tenor.com/view/discord-ping-gif-20120886");
