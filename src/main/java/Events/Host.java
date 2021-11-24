@@ -25,6 +25,9 @@ public class Host extends ListenerAdapter {
 			// Set description
 			eb.setDescription("Current bot host: " + ((System.getProperty("user.name").equalsIgnoreCase("ICAZ117")) ? "Raspberry Pi 4" : ((System.getProperty("user.name").equalsIgnoreCase("Ibraheem")) ? "Ibraheem" : "Mussab")));
 			
+			System.out.println("Current bot host: " + ((System.getProperty("user.name").equalsIgnoreCase("ICAZ117")) ? "Raspberry Pi 4" : ((System.getProperty("user.name").equalsIgnoreCase("Ibraheem")) ? "Ibraheem" : "Mussab")));
+			System.out.println(System.getProperty("user.name"));
+			System.out.println(System.getProperty("user.name").equalsIgnoreCase("ICAZ117"));
 			// Create embed
 			MessageEmbed embed = eb.build();
 			
