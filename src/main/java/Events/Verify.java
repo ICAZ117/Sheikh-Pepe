@@ -132,7 +132,7 @@ public class Verify extends ListenerAdapter {
 										public void run() {
 											// Confirm that the user has 
 											// completed verification
-											if (VERIFICATION_MAP.get(member.getIdLong()).getProgress() == 10) {
+											if (VERIFICATION_MAP.get(member.getIdLong()).getProgress() == 20) {
 												// Get all roles
 												Submission current = VERIFICATION_MAP.get(member.getIdLong());
 												Role male = event.getGuild().getRoleById(816758517305573406L);
@@ -300,6 +300,9 @@ public class Verify extends ListenerAdapter {
 			public void run() {
 				if (VERIFICATION_MAP.get(member.getIdLong()).getProgress() == 0) {
 					Main.dm(user, "To begin, please enter your first name:");
+					VERIFICATION_MAP.get(member.getIdLong()).incrementProgress();
+				}
+				else if (VERIFICATION_MAP.get(member.getIdLong()).getProgress() == 20) {
 					this.cancel();
 				}
 			}
@@ -309,8 +312,11 @@ public class Verify extends ListenerAdapter {
 		new Timer().schedule(new TimerTask() {
 			@Override
 			public void run() {
-				if (VERIFICATION_MAP.get(member.getIdLong()).getProgress() == 1) {
+				if (VERIFICATION_MAP.get(member.getIdLong()).getProgress() == 2) {
 					Main.dm(user, String.format("You entered: %s\nIs this correct?", VERIFICATION_MAP.get(member.getIdLong()).getFirstName()));
+					VERIFICATION_MAP.get(member.getIdLong()).incrementProgress();
+				}
+				else if (VERIFICATION_MAP.get(member.getIdLong()).getProgress() == 20) {
 					this.cancel();
 				}
 			}
@@ -320,8 +326,11 @@ public class Verify extends ListenerAdapter {
 		new Timer().schedule(new TimerTask() {
 			@Override
 			public void run() {
-				if (VERIFICATION_MAP.get(member.getIdLong()).getProgress() == 2) {
+				if (VERIFICATION_MAP.get(member.getIdLong()).getProgress() == 4) {
 					Main.dm(user, "Alright, now please enter your last name:");
+					VERIFICATION_MAP.get(member.getIdLong()).incrementProgress();
+				}
+				else if (VERIFICATION_MAP.get(member.getIdLong()).getProgress() == 20) {
 					this.cancel();
 				}
 			}
@@ -331,8 +340,11 @@ public class Verify extends ListenerAdapter {
 		new Timer().schedule(new TimerTask() {
 			@Override
 			public void run() {
-				if (VERIFICATION_MAP.get(member.getIdLong()).getProgress() == 3) {
+				if (VERIFICATION_MAP.get(member.getIdLong()).getProgress() == 6) {
 					Main.dm(user, String.format("You entered: %s\nIs this correct?", VERIFICATION_MAP.get(member.getIdLong()).getLastName()));
+					VERIFICATION_MAP.get(member.getIdLong()).incrementProgress();
+				}
+				else if (VERIFICATION_MAP.get(member.getIdLong()).getProgress() == 20) {
 					this.cancel();
 				}
 			}
@@ -342,8 +354,11 @@ public class Verify extends ListenerAdapter {
 		new Timer().schedule(new TimerTask() {
 			@Override
 			public void run() {
-				if (VERIFICATION_MAP.get(member.getIdLong()).getProgress() == 4) {
+				if (VERIFICATION_MAP.get(member.getIdLong()).getProgress() == 8) {
 					Main.dm(user, "Jazakallahu Khair. How old are you?");
+					VERIFICATION_MAP.get(member.getIdLong()).incrementProgress();
+				}
+				else if (VERIFICATION_MAP.get(member.getIdLong()).getProgress() == 20) {
 					this.cancel();
 				}
 			}
@@ -353,8 +368,11 @@ public class Verify extends ListenerAdapter {
 		new Timer().schedule(new TimerTask() {
 			@Override
 			public void run() {
-				if (VERIFICATION_MAP.get(member.getIdLong()).getProgress() == 5) {
+				if (VERIFICATION_MAP.get(member.getIdLong()).getProgress() == 10) {
 					Main.dm(user, String.format("You entered: %d\nIs this correct?", VERIFICATION_MAP.get(member.getIdLong()).getAge()));
+					VERIFICATION_MAP.get(member.getIdLong()).incrementProgress();
+				}
+				else if (VERIFICATION_MAP.get(member.getIdLong()).getProgress() == 20) {
 					this.cancel();
 				}
 			}
@@ -364,8 +382,11 @@ public class Verify extends ListenerAdapter {
 		new Timer().schedule(new TimerTask() {
 			@Override
 			public void run() {
-				if (VERIFICATION_MAP.get(member.getIdLong()).getProgress() == 6) { // OVER HERE FIX THIS
+				if (VERIFICATION_MAP.get(member.getIdLong()).getProgress() == 12) { // OVER HERE FIX THIS
 					Main.dm(user, "Cool. Are you male or female?");
+					VERIFICATION_MAP.get(member.getIdLong()).incrementProgress();
+				}
+				else if (VERIFICATION_MAP.get(member.getIdLong()).getProgress() == 20) {
 					this.cancel();
 				}
 			}
@@ -375,8 +396,11 @@ public class Verify extends ListenerAdapter {
 		new Timer().schedule(new TimerTask() {
 			@Override
 			public void run() {
-				if (VERIFICATION_MAP.get(member.getIdLong()).getProgress() == 7) {
+				if (VERIFICATION_MAP.get(member.getIdLong()).getProgress() == 14) {
 					Main.dm(user, String.format("You entered: %s\nIs this correct?", VERIFICATION_MAP.get(member.getIdLong()).getGender()));
+					VERIFICATION_MAP.get(member.getIdLong()).incrementProgress();
+				}
+				else if (VERIFICATION_MAP.get(member.getIdLong()).getProgress() == 20) {
 					this.cancel();
 				}
 			}
@@ -386,8 +410,11 @@ public class Verify extends ListenerAdapter {
 		new Timer().schedule(new TimerTask() {
 			@Override
 			public void run() {
-				if (VERIFICATION_MAP.get(member.getIdLong()).getProgress() == 8) {
+				if (VERIFICATION_MAP.get(member.getIdLong()).getProgress() == 16) {
 					Main.dm(user, "Awesome, have you seen Dirilis Ertugrul and/or Kurulus Osman?");
+					VERIFICATION_MAP.get(member.getIdLong()).incrementProgress();
+				}
+				else if (VERIFICATION_MAP.get(member.getIdLong()).getProgress() == 20) {
 					this.cancel();
 				}
 			}
@@ -397,8 +424,11 @@ public class Verify extends ListenerAdapter {
 		new Timer().schedule(new TimerTask() {
 			@Override
 			public void run() {
-				if (VERIFICATION_MAP.get(member.getIdLong()).getProgress() == 9) {
+				if (VERIFICATION_MAP.get(member.getIdLong()).getProgress() == 18) {
 					Main.dm(user, "Perfect, last question, I promise. Have you seen Payitaht Abdulhamid?");
+					VERIFICATION_MAP.get(member.getIdLong()).incrementProgress();
+				}
+				else if (VERIFICATION_MAP.get(member.getIdLong()).getProgress() == 20) {
 					this.cancel();
 				}
 			}
@@ -408,7 +438,7 @@ public class Verify extends ListenerAdapter {
 		new Timer().schedule(new TimerTask() {
 			@Override
 			public void run() {
-				if (VERIFICATION_MAP.get(member.getIdLong()).getProgress() == 10) {
+				if (VERIFICATION_MAP.get(member.getIdLong()).getProgress() == 20) {
 					Main.dm(user, "Alright, that's it! Jazakallahu Khair for your cooperation! Welcome to Muslim Gang!!");
 
 					Submission current = VERIFICATION_MAP.get(member.getIdLong());
@@ -429,35 +459,12 @@ public class Verify extends ListenerAdapter {
 
 				switch (VERIFICATION_MAP.get(event.getAuthor().getIdLong()).getProgress()) {
 					// First name
-					case 0: // First name
+					case 1: // First name
 						VERIFICATION_MAP.get(event.getAuthor().getIdLong()).setFirstName(content);
 						VERIFICATION_MAP.get(event.getAuthor().getIdLong()).incrementProgress();
 						break;
 						
 					// Confirm first name
-					case 1:
-						// If they didn't answer yes or no, print error
-						if (!content.equalsIgnoreCase("yes") && !content.equalsIgnoreCase("no")) {
-							Main.dm(event.getAuthor(), "Invalid reponse. Please respond with either yes or no.");
-							break;
-						}
-						// If they entered yes, increment progress
-						else if (content.equalsIgnoreCase("yes")) {
-							VERIFICATION_MAP.get(event.getAuthor().getIdLong()).incrementProgress();
-						}
-						// If they entered no, decrement progress
-						else if (content.equalsIgnoreCase("no")) {
-							VERIFICATION_MAP.get(event.getAuthor().getIdLong()).decrementProgress();
-						}
-						break;
-						
-					// Last name
-					case 2:
-						VERIFICATION_MAP.get(event.getAuthor().getIdLong()).setLastName(content);
-						VERIFICATION_MAP.get(event.getAuthor().getIdLong()).incrementProgress();
-						break;
-						
-					// Confirm last name
 					case 3:
 						// If they didn't answer yes or no, print error
 						if (!content.equalsIgnoreCase("yes") && !content.equalsIgnoreCase("no")) {
@@ -471,24 +478,19 @@ public class Verify extends ListenerAdapter {
 						// If they entered no, decrement progress
 						else if (content.equalsIgnoreCase("no")) {
 							VERIFICATION_MAP.get(event.getAuthor().getIdLong()).decrementProgress();
+							VERIFICATION_MAP.get(event.getAuthor().getIdLong()).decrementProgress();
+							VERIFICATION_MAP.get(event.getAuthor().getIdLong()).decrementProgress();
 						}
 						break;
 						
-					// Age
-					case 4:
-						int age;
-						try {
-							age = Integer.parseInt(content);
-						} catch (Exception e) {
-							Main.dm(event.getAuthor(), "Invalid reponse. Please enter an integer number.");
-							break;
-						}
-						VERIFICATION_MAP.get(event.getAuthor().getIdLong()).setAge(age);
+					// Last name
+					case 5:
+						VERIFICATION_MAP.get(event.getAuthor().getIdLong()).setLastName(content);
 						VERIFICATION_MAP.get(event.getAuthor().getIdLong()).incrementProgress();
 						break;
 						
-					// Confirm age
-					case 5:
+					// Confirm last name
+					case 7:
 						// If they didn't answer yes or no, print error
 						if (!content.equalsIgnoreCase("yes") && !content.equalsIgnoreCase("no")) {
 							Main.dm(event.getAuthor(), "Invalid reponse. Please respond with either yes or no.");
@@ -501,11 +503,45 @@ public class Verify extends ListenerAdapter {
 						// If they entered no, decrement progress
 						else if (content.equalsIgnoreCase("no")) {
 							VERIFICATION_MAP.get(event.getAuthor().getIdLong()).decrementProgress();
+							VERIFICATION_MAP.get(event.getAuthor().getIdLong()).decrementProgress();
+							VERIFICATION_MAP.get(event.getAuthor().getIdLong()).decrementProgress();
+						}
+						break;
+						
+					// Age
+					case 9:
+						int age;
+						try {
+							age = Integer.parseInt(content);
+						} catch (Exception e) {
+							Main.dm(event.getAuthor(), "Invalid reponse. Please enter an integer number.");
+							break;
+						}
+						VERIFICATION_MAP.get(event.getAuthor().getIdLong()).setAge(age);
+						VERIFICATION_MAP.get(event.getAuthor().getIdLong()).incrementProgress();
+						break;
+						
+					// Confirm age
+					case 11:
+						// If they didn't answer yes or no, print error
+						if (!content.equalsIgnoreCase("yes") && !content.equalsIgnoreCase("no")) {
+							Main.dm(event.getAuthor(), "Invalid reponse. Please respond with either yes or no.");
+							break;
+						}
+						// If they entered yes, increment progress
+						else if (content.equalsIgnoreCase("yes")) {
+							VERIFICATION_MAP.get(event.getAuthor().getIdLong()).incrementProgress();
+						}
+						// If they entered no, decrement progress
+						else if (content.equalsIgnoreCase("no")) {
+							VERIFICATION_MAP.get(event.getAuthor().getIdLong()).decrementProgress();
+							VERIFICATION_MAP.get(event.getAuthor().getIdLong()).decrementProgress();
+							VERIFICATION_MAP.get(event.getAuthor().getIdLong()).decrementProgress();
 						}
 						break;
 						
 					// Gender
-					case 6:
+					case 13:
 						if (content.equalsIgnoreCase("male")) {
 							content = "male";
 						}
@@ -521,7 +557,7 @@ public class Verify extends ListenerAdapter {
 						break;
 						
 					// Confirm gender
-					case 7:
+					case 15:
 						// If they didn't answer yes or no, print error
 						if (!content.equalsIgnoreCase("yes") && !content.equalsIgnoreCase("no")) {
 							Main.dm(event.getAuthor(), "Invalid reponse. Please respond with either yes or no.");
@@ -534,11 +570,13 @@ public class Verify extends ListenerAdapter {
 						// If they entered no, decrement progress
 						else if (content.equalsIgnoreCase("no")) {
 							VERIFICATION_MAP.get(event.getAuthor().getIdLong()).decrementProgress();
+							VERIFICATION_MAP.get(event.getAuthor().getIdLong()).decrementProgress();
+							VERIFICATION_MAP.get(event.getAuthor().getIdLong()).decrementProgress();
 						}
 						break;
 						
 					// Seen ertugrul
-					case 8:
+					case 17:
 						if (!content.equalsIgnoreCase("yes") && !content.equalsIgnoreCase("no")) {
 							Main.dm(event.getAuthor(), "Invalid reponse. Please respond with either yes or no.");
 							break;
@@ -548,7 +586,7 @@ public class Verify extends ListenerAdapter {
 						break;
 						
 					// Seen payitaht
-					case 9:
+					case 19:
 						if (!content.equalsIgnoreCase("yes") && !content.equalsIgnoreCase("no")) {
 							Main.dm(event.getAuthor(), "Invalid reponse. Please respond with either yes or no.");
 							break;
