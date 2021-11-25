@@ -12,6 +12,7 @@ public class Main {
 	public static final char PREFIX = '>';
 	public static final long SERVER_ID = 767404002647343115L;
 	public static final long LOG_CHANNEL_ID = 887415187429265448L;
+	public static final long LAUNCH_TIME = System.currentTimeMillis();
 	public static Guild SERVER;
 	public static TextChannel LOG_CHANNEL;
 	public static PrintWriter out;
@@ -80,6 +81,8 @@ public class Main {
 		jda.addEventListener(new Joke());
 		jda.addEventListener(new Ping());
 		jda.addEventListener(new Host());
+		jda.addEventListener(new Version());
+		jda.addEventListener(new Uptime());
 		jda.addEventListener(new Terminate());
 	}
 	

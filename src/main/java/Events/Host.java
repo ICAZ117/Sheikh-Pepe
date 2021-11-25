@@ -23,10 +23,7 @@ public class Host extends ListenerAdapter {
 			eb.setColor(new Color((float) Math.random(), (float) Math.random(), (float) Math.random()));
 			
 			// Set description
-//			eb.setDescription("Current bot host: " + ((System.getProperty("user.name").equalsIgnoreCase("ICAZ117")) ? "Raspberry Pi 4" : ((System.getProperty("user.name").equalsIgnoreCase("Ibraheem")) ? "Ibraheem" : "Mussab")));			
-			
-			// RPi Compatibility Fix :)
-			eb.setDescription("Current bot host: Raspberry Pi 4");
+			eb.setDescription("Current bot host: " + ((System.getProperty("user.name").equalsIgnoreCase("Ibraheem")) ? "Ibraheem" : "Raspberry Pi 4"));			
 			
 			// Create embed
 			MessageEmbed embed = eb.build();
