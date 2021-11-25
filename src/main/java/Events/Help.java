@@ -29,11 +29,15 @@ public class Help extends ListenerAdapter {
 			//eb.setThumbnail(event.getJDA().getSelfUser().getAvatarUrl()/*event.getGuild().getIconUrl()*/);
 			
 			// Create fields in embed
-			eb.addField("help", "Shows a list of all of the commands", false);
-			eb.addField("verify", "Registers you as an official member of Muslim Gang!", false);
-			eb.addField("arabic", "Shows a list of common arabic phrases for easy copy-pasting", false);
-			eb.addField("joke", "Gives you an extremely cringey (most of the time) joke!", false);
-			eb.addField("ping", "Returns a RestAction ping between the bot and the Discord servers", false);
+			eb.addField("help", "Shows a list of all of the commands", true);
+			eb.addField("verify", "Registers you as an official member of Muslim Gang!", true);
+			eb.addField("arabic", "Shows a list of common arabic phrases for easy copy-pasting", true);
+			eb.addField("joke", "Gives you an extremely cringey (most of the time) joke!", true);
+			eb.addField("ping", "Returns a RestAction ping between the bot and the Discord servers", true);
+			eb.addField("host", "Displayes where the bot is currently being run from", true);
+			eb.addField("version", "Displays the current version of the bot", true);
+			eb.addField("uptime", "Displays how long the bot has been running for", true);
+			eb.addField("", "", true);
 			
 			// Set footer
 			eb.setFooter("Prefix: >");

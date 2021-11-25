@@ -4,29 +4,16 @@ import Main.Main;
 
 import java.awt.Color;
 import java.net.*;
-import java.io.*;
-import java.security.*;
 import java.util.*;
 import Dependencies.Submission;
 import java.time.Duration;
 
-import net.dv8tion.jda.api.*;
-import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.entities.*;
-import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.events.message.priv.PrivateMessageReceivedEvent;
 import net.dv8tion.jda.api.exceptions.ErrorHandler;
 import net.dv8tion.jda.api.requests.ErrorResponse;
-import net.dv8tion.jda.api.requests.RestAction;
-import net.dv8tion.jda.api.requests.restaction.RoleAction;
-import net.dv8tion.jda.api.requests.restaction.pagination.ReactionPaginationAction;
-import net.dv8tion.jda.api.utils.concurrent.Task;
-import net.dv8tion.jda.internal.entities.UserImpl;
-import net.dv8tion.jda.internal.handle.InviteCreateHandler;
-import net.dv8tion.jda.internal.managers.GuildManagerImpl;
-import net.dv8tion.jda.internal.utils.concurrent.task.GatewayTask;
 
 public class Verify extends ListenerAdapter {
 
