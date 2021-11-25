@@ -12,6 +12,6 @@ ibi.in
 /target/ibi.in
 /src/main/resources/credentials.json
 ./target/EventLogs.out
-target/EventLogs.out
+/target/EventLogs.out
 /target/nohup.out
 
