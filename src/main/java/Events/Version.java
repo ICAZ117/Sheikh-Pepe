@@ -10,9 +10,6 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-import org.apache.maven.model.Model;
-import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
-import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
 
 public class Version extends ListenerAdapter {
 
@@ -23,34 +20,22 @@ public class Version extends ListenerAdapter {
 		if (messageSent.equals(Main.PREFIX + "version")) {
 			Main.log("-> Command \">version\" executed by " + event.getAuthor().getName());
 
-			MavenXpp3Reader reader = new MavenXpp3Reader();
+			// Build embed
+			EmbedBuilder eb = new EmbedBuilder();
 
-			try {
-				Model model = reader.read(new FileReader("pom.xml"));
+			// Set embed color
+			eb.setColor(new Color((float) Math.random(), (float) Math.random(), (float) Math.random()));
 
-				// Build embed
-				EmbedBuilder eb = new EmbedBuilder();
+			// Set embed title
+			eb.setAuthor("Bot Version", null);
 
-				// Set embed color
-				eb.setColor(new Color((float) Math.random(), (float) Math.random(), (float) Math.random()));
+			// Set embed description
+			eb.setDescription(Main.class.getPackage().getImplementationVersion());
 
-				// Set embed title
-				eb.setAuthor("Bot Version", null);
+			// Create embed
+			MessageEmbed embed = eb.build();
 
-				// Set embed description
-				eb.setDescription(model.getVersion());
-				
-				// Create embed
-				MessageEmbed embed = eb.build();
-
-				event.getChannel().sendMessage(embed).queue();
-			} catch (FileNotFoundException ex) {
-				Main.log("-> Unknown exception in version read");
-			} catch (IOException ex) {
-				Main.log("-> IOException in version read");
-			} catch (XmlPullParserException ex) {
-				Main.log("-> XmlPullParserException in version read");
-			}
+			event.getChannel().sendMessage(embed).queue();
 		}
 	}
 
