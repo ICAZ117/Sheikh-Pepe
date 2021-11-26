@@ -37,7 +37,7 @@ public class Help extends ListenerAdapter {
 			eb.addField("host", "Displayes where the bot is currently being run from", true);
 			eb.addField("version", "Displays the current version of the bot", true);
 			eb.addField("uptime", "Displays how long the bot has been running for", true);
-			eb.addField("", "", true);
+			eb.addField("systeminfo", "Displays general information about the system", true);
 			
 			// Set footer
 			eb.setFooter("Prefix: >");

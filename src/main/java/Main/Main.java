@@ -83,6 +83,7 @@ public class Main {
 		jda.addEventListener(new Host());
 		jda.addEventListener(new Version());
 		jda.addEventListener(new Uptime());
+		jda.addEventListener(new SystemInfo());
 		jda.addEventListener(new Terminate());
 	}
 	
