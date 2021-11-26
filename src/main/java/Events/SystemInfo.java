@@ -52,8 +52,8 @@ public class SystemInfo extends ListenerAdapter {
 			eb.setAuthor("System Information", null);
 
 			// Create fields in embed
-			eb.addField("CPU Temperature", String.format("%d℃", (int) cpu), true);
-			eb.addField("GPU Temperature", String.format("%d℃", (int) gpu), true);
+			eb.addField("CPU Temperature", String.format("%d°C", (int) cpu), true);
+			eb.addField("GPU Temperature", String.format("%d°C", (int) gpu), true);
 
 			// Create embed
 			MessageEmbed embed = eb.build();
