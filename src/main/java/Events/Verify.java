@@ -110,7 +110,7 @@ public class Verify extends ListenerAdapter {
                                                                         event.getChannel().sendMessage("Verification for user " + event.getAuthor().getName() + " initialized successfully. " + event.getAuthor().getAsMention() + ", check your DMs!").queue();
                                                                         
                                                                         // Log verification success message in command logs
-                                                                        Main.log("Verification for user " + event.getAuthor().getName() + " initialized successfully.");
+                                                                        Main.log("-> Verification for user " + event.getAuthor().getName() + " initialized successfully.");
                                                                         
 									// Add them to the verification list
 									VERIFICATION_MAP.put(event.getAuthor().getIdLong(), new Submission());
