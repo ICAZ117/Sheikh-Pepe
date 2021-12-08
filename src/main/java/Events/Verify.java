@@ -2,8 +2,6 @@ package Events;
 
 import Main.Main;
 
-import java.awt.Color;
-import java.net.*;
 import java.util.*;
 import Dependencies.Submission;
 import java.time.Duration;
@@ -64,6 +62,7 @@ public class Verify extends ListenerAdapter {
 					// If the member is already verified, tell them so!
 					if (roles.get(i).getName().equalsIgnoreCase("Male") || roles.get(i).getName().equalsIgnoreCase("Female")) {
 						event.getChannel().sendMessage("Bruh. You're already verified ._.").queue();
+                                                Main.log("-> Verification failed: " + event.getAuthor().getName() + " is already verified");
 						isVerified = true;
 					}
 
@@ -82,6 +81,7 @@ public class Verify extends ListenerAdapter {
 						// then try again
 						if (!acceptedRules) {
 							event.getChannel().sendMessage("Uh-oh, looks like you haven't accepted the rules yet. Please head over to <#767404002672771128> to accept the rules, and then try again.").queue();
+                                                        Main.log("-> Verification failed: " + event.getAuthor().getName() + " has not accepted the rules");
 						}
 						// Else, the user has accepted the rules, initialize the
 						// verification process
@@ -92,11 +92,13 @@ public class Verify extends ListenerAdapter {
 							if (VERIFICATION_MAP.containsKey(event.getAuthor().getIdLong())) {
 								event.getChannel().sendMessage("Ayo big brain, you've already initiated your verification. Check your DMs smh.").queue();
 								Main.dm(user, "Oy, over here. Can we continue now pls??");
+                                                                Main.log("-> Verification failed: " + event.getAuthor().getName() + " has already begun their verification");
 							}
 							else {
 								// If DMs are closed, print an error message
 								if (!canDM(event.getAuthor(), event)) {
 									event.getChannel().sendMessage("Unfortunately, your DMs are closed, meaning that I cannot verify you. Please follow the instructions in <#910678638654029835>, and then try again.").queue();
+                                                                        Main.log("-> Verification failed: " + event.getAuthor().getName() + "'s DM's are closed");
 								}
 								// ELSE. If execution reaches this point, that 
 								// means that the user in not yet verified, they
@@ -104,6 +106,12 @@ public class Verify extends ListenerAdapter {
 								// started their verification, AND their DMs are
 								// open. Therefore, we need to verify them!
 								else {
+                                                                        // Respond to the user telling them that their verification has been initialized
+                                                                        event.getChannel().sendMessage("Verification for user " + event.getAuthor().getName() + " initialized successfully. " + event.getAuthor().getAsMention() + ", check your DMs!").queue();
+                                                                        
+                                                                        // Log verification success message in command logs
+                                                                        Main.log("Verification for user " + event.getAuthor().getName() + " initialized successfully.");
+                                                                        
 									// Add them to the verification list
 									VERIFICATION_MAP.put(event.getAuthor().getIdLong(), new Submission());
 									
