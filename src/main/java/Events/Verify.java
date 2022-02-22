@@ -16,7 +16,7 @@ import net.dv8tion.jda.api.requests.ErrorResponse;
 public class Verify extends ListenerAdapter {
 
 	public HashSet<Long> IDs = new HashSet<>();
-	private static final Map<Long, Submission> VERIFICATION_MAP = new HashMap<>();
+	public static final Map<Long, Submission> VERIFICATION_MAP = new HashMap<>();
 	private final Timer timer = new Timer();
 	private boolean canDM;
 	private boolean inverted;
