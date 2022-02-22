@@ -138,9 +138,9 @@ public class Verify extends ListenerAdapter {
 												Role age16 = event.getGuild().getRoleById(795390767258402836L);
 												Role age17 = event.getGuild().getRoleById(795390809159499796L);
 												Role age18 = event.getGuild().getRoleById(795390849357185044L);
-												Role age19 = event.getGuild().getRoleById(1L);
-												Role age20 = event.getGuild().getRoleById(1L);
-												Role age21 = event.getGuild().getRoleById(1L);
+												Role age19 = event.getGuild().getRoleById(945729676297506827L);
+												Role age20 = event.getGuild().getRoleById(945729827619602492L);
+												Role age21 = event.getGuild().getRoleById(945729844782706798L);
 												Role kayi = event.getGuild().getRoleById(793956269898596404L);
 												Role pasha = event.getGuild().getRoleById(793956273418010634L);
 												Role dj = event.getGuild().getRoleById(767404002647343124L);
