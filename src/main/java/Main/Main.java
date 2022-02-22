@@ -61,11 +61,11 @@ public class Main {
 				log("-> Connection status: ONLINE");
 				log("-> Loading modules...");
 				
-				Scanner in = new Scanner(new File("ibi.in"));
-				
-				while (in.hasNext()) {
-					IBIs.add(in.next());
-				}
+//				Scanner in = new Scanner(new File("ibi.in"));
+//				
+//				while (in.hasNext()) {
+//					IBIs.add(in.next());
+//				}
 				
 				admins.add(390633990312427520L);
 				admins.add(384665051333656577L);
@@ -85,6 +85,7 @@ public class Main {
 		jda.addEventListener(new Version());
 		jda.addEventListener(new Uptime());
 		jda.addEventListener(new SystemInfo());
+		jda.addEventListener(new Leave());
 		jda.addEventListener(new Terminate());
 	}
 	
