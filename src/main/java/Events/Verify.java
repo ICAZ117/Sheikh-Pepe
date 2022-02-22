@@ -62,7 +62,7 @@ public class Verify extends ListenerAdapter {
 					// If the member is already verified, tell them so!
 					if (roles.get(i).getName().equalsIgnoreCase("Male") || roles.get(i).getName().equalsIgnoreCase("Female")) {
 						event.getChannel().sendMessage("Bruh. You're already verified ._.").queue();
-                                                Main.log("-> Verification failed: " + event.getAuthor().getName() + " is already verified");
+						Main.log("-> Verification failed: " + event.getAuthor().getName() + " is already verified");
 						isVerified = true;
 					}
 
@@ -81,7 +81,7 @@ public class Verify extends ListenerAdapter {
 						// then try again
 						if (!acceptedRules) {
 							event.getChannel().sendMessage("Uh-oh, looks like you haven't accepted the rules yet. Please head over to <#767404002672771128> to accept the rules, and then try again.").queue();
-                                                        Main.log("-> Verification failed: " + event.getAuthor().getName() + " has not accepted the rules");
+							Main.log("-> Verification failed: " + event.getAuthor().getName() + " has not accepted the rules");
 						}
 						// Else, the user has accepted the rules, initialize the
 						// verification process
@@ -92,13 +92,13 @@ public class Verify extends ListenerAdapter {
 							if (VERIFICATION_MAP.containsKey(event.getAuthor().getIdLong())) {
 								event.getChannel().sendMessage("Ayo big brain, you've already initiated your verification. Check your DMs smh.").queue();
 								Main.dm(user, "Oy, over here. Can we continue now pls??");
-                                                                Main.log("-> Verification failed: " + event.getAuthor().getName() + " has already begun their verification");
+								Main.log("-> Verification failed: " + event.getAuthor().getName() + " has already begun their verification");
 							}
 							else {
 								// If DMs are closed, print an error message
 								if (!canDM(event.getAuthor(), event)) {
 									event.getChannel().sendMessage("Unfortunately, your DMs are closed, meaning that I cannot verify you. Please follow the instructions in <#910678638654029835>, and then try again.").queue();
-                                                                        Main.log("-> Verification failed: " + event.getAuthor().getName() + "'s DM's are closed");
+									Main.log("-> Verification failed: " + event.getAuthor().getName() + "'s DM's are closed");
 								}
 								// ELSE. If execution reaches this point, that 
 								// means that the user in not yet verified, they
@@ -106,15 +106,15 @@ public class Verify extends ListenerAdapter {
 								// started their verification, AND their DMs are
 								// open. Therefore, we need to verify them!
 								else {
-                                                                        // Respond to the user telling them that their verification has been initialized
-                                                                        event.getChannel().sendMessage("Verification for user " + event.getAuthor().getName() + " initialized successfully. " + event.getAuthor().getAsMention() + ", check your DMs!").queue();
-                                                                        
-                                                                        // Log verification success message in command logs
-                                                                        Main.log("-> Verification for user " + event.getAuthor().getName() + " initialized successfully.");
-                                                                        
+									// Respond to the user telling them that their verification has been initialized
+									event.getChannel().sendMessage("Verification for user " + event.getAuthor().getName() + " initialized successfully. " + event.getAuthor().getAsMention() + ", check your DMs!").queue();
+
+									// Log verification success message in command logs
+									Main.log("-> Verification for user " + event.getAuthor().getName() + " initialized successfully.");
+
 									// Add them to the verification list
 									VERIFICATION_MAP.put(event.getAuthor().getIdLong(), new Submission());
-									
+
 									// Initiate DM verification for the user. 
 									// This is the stage in which the bot DMs
 									// the user and gets all of their info.
@@ -138,6 +138,9 @@ public class Verify extends ListenerAdapter {
 												Role age16 = event.getGuild().getRoleById(795390767258402836L);
 												Role age17 = event.getGuild().getRoleById(795390809159499796L);
 												Role age18 = event.getGuild().getRoleById(795390849357185044L);
+												Role age19 = event.getGuild().getRoleById(1L);
+												Role age20 = event.getGuild().getRoleById(1L);
+												Role age21 = event.getGuild().getRoleById(1L);
 												Role kayi = event.getGuild().getRoleById(793956269898596404L);
 												Role pasha = event.getGuild().getRoleById(793956273418010634L);
 												Role dj = event.getGuild().getRoleById(767404002647343124L);
@@ -146,7 +149,7 @@ public class Verify extends ListenerAdapter {
 												// If the bot is unable to get 
 												// any of the roles, print an
 												// error message
-												if (male == null || female == null || age13 == null || age14 == null || age15 == null || age16 == null || age17 == null || age18 == null || kayi == null || pasha == null || dj == null || unidentified == null) {
+												if (male == null || female == null || age13 == null || age14 == null || age15 == null || age16 == null || age17 == null || age18 == null || age19 == null || age20 == null || age21 == null|| kayi == null || pasha == null || dj == null || unidentified == null) {
 													Main.out.println("CANNOT FIND A ROLE, CANCELLING VERIFICATION");
 													Main.out.flush();
 													Main.dm(user, "My apologies, I seem to be encountering some sort of error. Please ping <@&794030971082375178> in <#767720553145958400> for assistance. Jazakallahu Khair!");
@@ -181,6 +184,15 @@ public class Verify extends ListenerAdapter {
 															break;
 														case 18:
 															event.getGuild().addRoleToMember(member, age18).queue();
+															break;
+														case 19:
+															event.getGuild().addRoleToMember(member, age19).queue();
+															break;
+														case 20:
+															event.getGuild().addRoleToMember(member, age20).queue();
+															break;
+														case 21:
+															event.getGuild().addRoleToMember(member, age21).queue();
 															break;
 														default:
 															if (current.getAge() < 13) {
@@ -251,6 +263,24 @@ public class Verify extends ListenerAdapter {
 
 			}
 		}
+		else if (messageSent.startsWith(Main.PREFIX + "reset")) {
+			String mention = messageSent.substring(9, messageSent.length() - 1);
+
+			try {
+				if (mention.length() >= 17 && mention.length() <= Main.ID_LENGTH) {
+					long id = Long.parseLong(mention);
+				}
+			} catch (Exception e) {
+
+			}
+
+//			if (event.getGuild().getMembers() {
+//				messageSent.substring(7)
+//			}
+			{
+
+			}
+		}
 	}
 
 	public boolean canDM(User user, GuildMessageReceivedEvent event) {
@@ -266,13 +296,12 @@ public class Verify extends ListenerAdapter {
 								(e) -> invert()));
 
 		long time = System.currentTimeMillis();
-		
-		while (System.currentTimeMillis() <= time + 1000) {			
-			
-		}
-		
-//		System.out.printf("AFTER LOOP\ncanDM: %b\ntime: %d\n", canDM, System.currentTimeMillis());
 
+		while (System.currentTimeMillis() <= time + 1000) {
+
+		}
+
+//		System.out.printf("AFTER LOOP\ncanDM: %b\ntime: %d\n", canDM, System.currentTimeMillis());
 		return canDM;
 	}
 
@@ -302,7 +331,7 @@ public class Verify extends ListenerAdapter {
 				}
 			}
 		}, 100, 100);
-		
+
 		// Confirm first Name
 		new Timer().schedule(new TimerTask() {
 			@Override
@@ -316,7 +345,7 @@ public class Verify extends ListenerAdapter {
 				}
 			}
 		}, 100, 100);
-		
+
 		// Last Name
 		new Timer().schedule(new TimerTask() {
 			@Override
@@ -330,7 +359,7 @@ public class Verify extends ListenerAdapter {
 				}
 			}
 		}, 100, 100);
-		
+
 		// Confirm last Name
 		new Timer().schedule(new TimerTask() {
 			@Override
@@ -358,7 +387,7 @@ public class Verify extends ListenerAdapter {
 				}
 			}
 		}, 100, 100);
-		
+
 		// Confirm age
 		new Timer().schedule(new TimerTask() {
 			@Override
@@ -386,7 +415,7 @@ public class Verify extends ListenerAdapter {
 				}
 			}
 		}, 100, 100);
-		
+
 		// Confirm Gender
 		new Timer().schedule(new TimerTask() {
 			@Override
@@ -400,7 +429,7 @@ public class Verify extends ListenerAdapter {
 				}
 			}
 		}, 100, 100);
-		
+
 		// Kayi
 		new Timer().schedule(new TimerTask() {
 			@Override
@@ -458,7 +487,7 @@ public class Verify extends ListenerAdapter {
 						VERIFICATION_MAP.get(event.getAuthor().getIdLong()).setFirstName(content);
 						VERIFICATION_MAP.get(event.getAuthor().getIdLong()).incrementProgress();
 						break;
-						
+
 					// Confirm first name
 					case 3:
 						// If they didn't answer yes or no, print error
@@ -477,13 +506,13 @@ public class Verify extends ListenerAdapter {
 							VERIFICATION_MAP.get(event.getAuthor().getIdLong()).decrementProgress();
 						}
 						break;
-						
+
 					// Last name
 					case 5:
 						VERIFICATION_MAP.get(event.getAuthor().getIdLong()).setLastName(content);
 						VERIFICATION_MAP.get(event.getAuthor().getIdLong()).incrementProgress();
 						break;
-						
+
 					// Confirm last name
 					case 7:
 						// If they didn't answer yes or no, print error
@@ -502,7 +531,7 @@ public class Verify extends ListenerAdapter {
 							VERIFICATION_MAP.get(event.getAuthor().getIdLong()).decrementProgress();
 						}
 						break;
-						
+
 					// Age
 					case 9:
 						int age;
@@ -515,7 +544,7 @@ public class Verify extends ListenerAdapter {
 						VERIFICATION_MAP.get(event.getAuthor().getIdLong()).setAge(age);
 						VERIFICATION_MAP.get(event.getAuthor().getIdLong()).incrementProgress();
 						break;
-						
+
 					// Confirm age
 					case 11:
 						// If they didn't answer yes or no, print error
@@ -534,7 +563,7 @@ public class Verify extends ListenerAdapter {
 							VERIFICATION_MAP.get(event.getAuthor().getIdLong()).decrementProgress();
 						}
 						break;
-						
+
 					// Gender
 					case 13:
 						if (content.equalsIgnoreCase("male")) {
@@ -550,7 +579,7 @@ public class Verify extends ListenerAdapter {
 						VERIFICATION_MAP.get(event.getAuthor().getIdLong()).setGender(content);
 						VERIFICATION_MAP.get(event.getAuthor().getIdLong()).incrementProgress();
 						break;
-						
+
 					// Confirm gender
 					case 15:
 						// If they didn't answer yes or no, print error
@@ -569,7 +598,7 @@ public class Verify extends ListenerAdapter {
 							VERIFICATION_MAP.get(event.getAuthor().getIdLong()).decrementProgress();
 						}
 						break;
-						
+
 					// Seen ertugrul
 					case 17:
 						if (!content.equalsIgnoreCase("yes") && !content.equalsIgnoreCase("no")) {
@@ -579,7 +608,7 @@ public class Verify extends ListenerAdapter {
 						VERIFICATION_MAP.get(event.getAuthor().getIdLong()).setSeenErtugrul(content.equalsIgnoreCase("yes"));
 						VERIFICATION_MAP.get(event.getAuthor().getIdLong()).incrementProgress();
 						break;
-						
+
 					// Seen payitaht
 					case 19:
 						if (!content.equalsIgnoreCase("yes") && !content.equalsIgnoreCase("no")) {
@@ -589,7 +618,7 @@ public class Verify extends ListenerAdapter {
 						VERIFICATION_MAP.get(event.getAuthor().getIdLong()).setSeenPayitaht(content.equalsIgnoreCase("yes"));
 						VERIFICATION_MAP.get(event.getAuthor().getIdLong()).incrementProgress();
 						break;
-						
+
 					// Bruh
 					default:
 						Main.dm(event.getAuthor(), "My dude. I'm a bot. Why are you DMing me?? smh <:coolthonk:791626203273756673>");

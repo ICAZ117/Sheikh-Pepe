@@ -13,6 +13,7 @@ public class Main {
 	public static final long SERVER_ID = 767404002647343115L;
 	public static final long LOG_CHANNEL_ID = 887415187429265448L;
 	public static final long LAUNCH_TIME = System.currentTimeMillis();
+	public static final int ID_LENGTH = 18;
 	public static Guild SERVER;
 	public static TextChannel LOG_CHANNEL;
 	public static PrintWriter out;
