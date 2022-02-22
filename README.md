@@ -1,11 +1,9 @@
 # Sheikh-Pepe
-Official Discord Bot for Muslim Gang
-
 Prefix: >
 
 Commands:
 * help: Shows a list of all of the commands
-* verify: Registers you as an official member of Muslim Gang!
+* verify: Registers users into server
 * arabic: Shows a list of common arabic phrases for easy copy-pasting
 * joke: Gives you an extremely cringey (most of the time) joke!
 * ping: Returns a RestAction ping between the bot and the Discord servers
