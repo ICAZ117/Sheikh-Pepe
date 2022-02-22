@@ -29,7 +29,7 @@ public class Leave extends ListenerAdapter {
 		for (Role next : roles) {
 			String name = next.getName();
 			
-			if (name.charAt(name.length() - 1) == '.' && name.charAt(name.length() - 3) == ' ' && next.getGuild().getMembersWithRoles(next).size() == 1) {
+			if (name.charAt(name.length() - 1) == '.' && name.charAt(name.length() - 3) == ' ' && next.getGuild().getMembersWithRoles(next).size() <= 1) {
 				Main.log("-> Deleted role " + name);
 				next.delete().queue();
 				break;
