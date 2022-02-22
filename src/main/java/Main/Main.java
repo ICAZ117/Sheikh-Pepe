@@ -6,6 +6,7 @@ import java.util.*;
 import javax.security.auth.login.LoginException;
 import net.dv8tion.jda.api.*;
 import net.dv8tion.jda.api.entities.*;
+import net.dv8tion.jda.api.requests.GatewayIntent;
 
 public class Main {
 
@@ -23,9 +24,21 @@ public class Main {
 	public static void main(String[] args) throws LoginException, InterruptedException, FileNotFoundException {
 		// Initialize PrintWriter for event logs
 		out = new PrintWriter(new File("EventLogs.out"));
-		
+
 		// Initialize JDA
-		JDA jda = JDABuilder.createDefault(new Scanner(new File("token.txt")).nextLine()).setActivity(Activity.playing("Ultimate Thumb Wrestling 2021")).build();
+		JDA jda = JDABuilder.create(new Scanner(new File("token.txt")).nextLine(), 
+				GatewayIntent.DIRECT_MESSAGES, 
+				GatewayIntent.DIRECT_MESSAGE_REACTIONS, 
+				GatewayIntent.DIRECT_MESSAGE_TYPING, 
+				GatewayIntent.GUILD_BANS, 
+				GatewayIntent.GUILD_EMOJIS, 
+				GatewayIntent.GUILD_INVITES, 
+				GatewayIntent.GUILD_MEMBERS, 
+				GatewayIntent.GUILD_MESSAGES, 
+				GatewayIntent.GUILD_MESSAGE_REACTIONS, 
+				GatewayIntent.GUILD_MESSAGE_TYPING, 
+				GatewayIntent.GUILD_PRESENCES, 
+				GatewayIntent.GUILD_VOICE_STATES).setActivity(Activity.playing("Ultimate Thumb Wrestling 2021")).build();
 
 		// Await completion of connection to Discord servers
 		jda.awaitReady();
@@ -44,7 +57,7 @@ public class Main {
 		else {
 			out.printf("\n------------------ SUCCESS ------------------\n-> Found Server: %s\n-> Searching for log channel...\n", SERVER.getName());
 			out.flush();
-			
+
 			// Get system log channel
 			LOG_CHANNEL = SERVER.getTextChannelById(LOG_CHANNEL_ID);
 
@@ -60,16 +73,15 @@ public class Main {
 				out.flush();
 				log("-> Connection status: ONLINE");
 				log("-> Loading modules...");
-				
+
 //				Scanner in = new Scanner(new File("ibi.in"));
 //				
 //				while (in.hasNext()) {
 //					IBIs.add(in.next());
 //				}
-				
 				admins.add(390633990312427520L);
 				admins.add(384665051333656577L);
-				
+
 				log("-> Initialization complete");
 			}
 		}
@@ -88,13 +100,13 @@ public class Main {
 		jda.addEventListener(new Leave());
 		jda.addEventListener(new Terminate());
 	}
-	
+
 	public static void log(String message) {
 		LOG_CHANNEL.sendMessage(String.format("```%s```", message)).queue();
 		out.println(message);
 		out.flush();
 	}
-	
+
 	public static void dm(User user, String message) {
 		user.openPrivateChannel().flatMap(channel -> channel.sendMessage(message)).queue();
 	}
