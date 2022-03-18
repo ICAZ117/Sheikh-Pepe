@@ -233,18 +233,17 @@ public class Verify extends ListenerAdapter {
 													}
 													// If it doesn't, create a new name role
 													else {
-														event.getGuild().createRole().setName(current.getFirstName() + " " + current.getLastName().charAt(0) + ".").queue();
+														String nameString = current.getFirstName().toUpperCase().charAt(0) + current.getFirstName().substring(1) + " " + current.getLastName().toUpperCase().charAt(0) + ".";
+														
+														event.getGuild().createRole().setName(nameString).queue();
 
-														while (event.getGuild().getRolesByName(current.getFirstName() + " " + current.getLastName().charAt(0) + ".", true).size() <= 0) {
-														}
-
-														List<Role> newNameList = event.getGuild().getRolesByName(current.getFirstName() + " " + current.getLastName().charAt(0) + ".", true);
+														List<Role> newNameList = event.getGuild().getRolesByName(nameString, true);
 
 														Main.out.println("New role: " + newNameList.get(0).getName());
 														Main.out.flush();
 
 														Role newName = newNameList.get(0);
-														event.getGuild().modifyRolePositions().selectPosition(newName).moveTo(event.getGuild().modifyRolePositions().selectPosition(age18).getSelectedPosition()).queue();
+														event.getGuild().modifyRolePositions().selectPosition(newName).moveTo(event.getGuild().modifyRolePositions().selectPosition(age21).getSelectedPosition()).queue();
 														event.getGuild().addRoleToMember(member, newName).queue();
 													}
 												}
