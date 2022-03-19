@@ -6,8 +6,22 @@
 -> Connection status: ONLINE
 -> Loading modules...
 -> Initialization complete
--> Command ">ping" executed by ICAZ117
--> Command ">host" executed by ICAZ117
+-> Command ">verify" executed by UstadhPepe
+-> Verification for user UstadhPepe initialized successfully.
+-> Verification complete for user: UstadhPepe
+   First Name: thisIsATest
+   Last name: test
+   Age: 17
+   Gender: male
+   Seen Ertugrul/Osman: true
+   Seen Payitaht: true
+ThisIsATest T.
+1
+New role: ThisIsATest T.
+-> Command ">verify" executed by Raiane
+-> Verification for user Raiane initialized successfully.
+-> User Raiane#3546 left the server
+-> User reflector#0804 left the server
 -> Terminating program execution
 
 

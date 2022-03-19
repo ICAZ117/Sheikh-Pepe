@@ -5,6 +5,8 @@ import Main.Main;
 import java.util.*;
 import Dependencies.Submission;
 import java.time.Duration;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -223,9 +225,12 @@ public class Verify extends ListenerAdapter {
 
 													// Remove unidentified role
 													event.getGuild().removeRoleFromMember(member, unidentified).queue();
+													
+													// Create name string for easy reference
+													String nameString = current.getFirstName().toUpperCase().charAt(0) + current.getFirstName().substring(1) + " " + current.getLastName().toUpperCase().charAt(0) + ".";
 
 													// Search if name role already exists
-													List<Role> names = event.getGuild().getRolesByName(current.getFirstName() + " " + current.getLastName().charAt(0) + ".", true);
+													List<Role> names = event.getGuild().getRolesByName(nameString, true);
 
 													// If it does, give it to the member
 													if (names.size() > 0) {
@@ -233,12 +238,17 @@ public class Verify extends ListenerAdapter {
 													}
 													// If it doesn't, create a new name role
 													else {
-														String nameString = current.getFirstName().toUpperCase().charAt(0) + current.getFirstName().substring(1) + " " + current.getLastName().toUpperCase().charAt(0) + ".";
-														
 														event.getGuild().createRole().setName(nameString).queue();
-
+														
+														// Sleep for 1 second to bypass rest action delay
+														try {
+															Thread.sleep(1000);
+														} catch (InterruptedException ex) {
+															Main.out.println("COULD NOT SLEEP THREAD");
+														}
+														
 														List<Role> newNameList = event.getGuild().getRolesByName(nameString, true);
-
+														
 														Main.out.println("New role: " + newNameList.get(0).getName());
 														Main.out.flush();
 
