@@ -10,7 +10,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 public class Leave extends ListenerAdapter {
 
 	@Override
-	public void onGuildMemberRemove​(@Nonnull GuildMemberRemoveEvent event) {
+	public void onGuildMemberRemove(@Nonnull GuildMemberRemoveEvent event) {
 		Member member = event.getMember();
 		User user = event.getUser();
 		Guild guild = event.getGuild();

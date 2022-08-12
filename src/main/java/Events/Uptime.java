@@ -2,22 +2,22 @@ package Events;
 
 
 import Main.Main;
-import java.util.*;
-import java.io.*;
 import java.awt.*;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 public class Uptime extends ListenerAdapter {
 
 	@Override
-	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
-		String messageSent = event.getMessage().getContentRaw();
+	public void onSlashCommandInteraction(SlashCommandInteractionEvent event) {
+		// Check the command type
+		if (event.getName().equals("uptime") && !event.getUser().isBot()) {
+			// Send waiting message
+			event.deferReply().queue();
 
-		if (messageSent.equals(Main.PREFIX + "uptime")) {
-			Main.log("-> Command \">uptime\" executed by " + event.getAuthor().getName());
+			Main.log("-> Command \">uptime\" executed by " + event.getUser().getName());
 			
 			long uptime = System.currentTimeMillis() - Main.LAUNCH_TIME, hrs, mins, secs;
 			
@@ -42,7 +42,7 @@ public class Uptime extends ListenerAdapter {
 			// Create embed
 			MessageEmbed embed = eb.build();
 			
-			event.getChannel().sendMessage(embed).queue();
+			event.getHook().sendMessageEmbeds(embed).queue();
 		}
 	}
 

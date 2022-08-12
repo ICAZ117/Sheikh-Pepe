@@ -4,17 +4,19 @@ import Main.Main;
 import java.awt.Color;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 public class Help extends ListenerAdapter {
 
-	@Override
-	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
-		String messageSent = event.getMessage().getContentRaw();
-
-		if (messageSent.equals(Main.PREFIX + "help")) {
-			Main.log("-> Command \">help\" executed by " + event.getAuthor().getName());
+	 @Override
+	 public void onSlashCommandInteraction(SlashCommandInteractionEvent event) {
+        // Check the command type
+        if (event.getName().equals("help") && !event.getUser().isBot()) {
+            // Send waiting message
+            event.deferReply().queue();
+			
+			Main.log("-> Command \">help\" executed by " + event.getUser().getName());
 			
 			// Build embed
 			EmbedBuilder eb = new EmbedBuilder();
@@ -39,13 +41,11 @@ public class Help extends ListenerAdapter {
 			eb.addField("uptime", "Displays how long the bot has been running for", true);
 			eb.addField("systeminfo", "Displays general information about the system", true);
 			
-			// Set footer
-			eb.setFooter("Prefix: >");
-			
 			// Create embed
 			MessageEmbed embed = eb.build();
 			
-			event.getChannel().sendMessage(embed).queue();
+			// Send the embed to the channel
+            event.getHook().sendMessageEmbeds(embed).queue();
 		}
 	}
 

@@ -6,22 +6,20 @@
 -> Connection status: ONLINE
 -> Loading modules...
 -> Initialization complete
--> Command ">verify" executed by UstadhPepe
--> Verification for user UstadhPepe initialized successfully.
--> Verification complete for user: UstadhPepe
-   First Name: thisIsATest
-   Last name: test
-   Age: 17
-   Gender: male
-   Seen Ertugrul/Osman: true
-   Seen Payitaht: true
-ThisIsATest T.
-1
-New role: ThisIsATest T.
--> Command ">verify" executed by Raiane
--> Verification for user Raiane initialized successfully.
--> User Raiane#3546 left the server
--> User reflector#0804 left the server
+-> Command ">uptime" executed by UstadhPepe
+-> Command ">host" executed by UstadhPepe
+-> Command ">systeminfo" executed by UstadhPepe
+-> Command ">terminate" executed by UstadhPepe
+-> Command ">joke" executed by UstadhPepe
+-> Command ">joke" executed by UstadhPepe
+-> Command ">joke" executed by UstadhPepe
+-> Command ">joke" executed by UstadhPepe
+-> Command ">joke" executed by UstadhPepe
+-> Command ">joke" executed by UstadhPepe
+-> Command ">ping" executed by UstadhPepe
+-> Command ">ping" executed by UstadhPepe
+-> Command ">version" executed by UstadhPepe
+-> Command ">terminate" executed by ICAZ117
 -> Terminating program execution
 
 

@@ -4,17 +4,19 @@ import Main.Main;
 import java.awt.Color;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 public class Host extends ListenerAdapter {
 
 	@Override
-	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
-		String messageSent = event.getMessage().getContentRaw();
+	public void onSlashCommandInteraction(SlashCommandInteractionEvent event) {
+		// Check the command type
+		if (event.getName().equals("host") && !event.getUser().isBot()) {
+			// Send waiting message
+			event.deferReply().queue();
 
-		if (messageSent.equals(Main.PREFIX + "host")) {
-			Main.log("-> Command \">host\" executed by " + event.getAuthor().getName());
+			Main.log("-> Command \">host\" executed by " + event.getUser().getName());
 			
 			// Build embed
 			EmbedBuilder eb = new EmbedBuilder();
@@ -28,7 +30,7 @@ public class Host extends ListenerAdapter {
 			// Create embed
 			MessageEmbed embed = eb.build();
 			
-			event.getChannel().sendMessage(embed).queue();
+			event.getHook().sendMessageEmbeds(embed).queue();
 		}
 	}
 

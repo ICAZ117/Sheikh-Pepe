@@ -4,7 +4,7 @@ import Main.Main;
 import java.awt.Color;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 public class Joke extends ListenerAdapter {
@@ -105,21 +105,26 @@ public class Joke extends ListenerAdapter {
 		"Q: What\'s better than Ted Danson?\nA: Ted singing and Danson!"};
 
 	@Override
-	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
-		String messageSent = event.getMessage().getContentRaw();
+	public void onSlashCommandInteraction(SlashCommandInteractionEvent event) {
+		// Check the command type
+		if (event.getName().equals("joke") && !event.getUser().isBot()) {
+			// Send waiting message
+			event.deferReply().queue();
 
-		if (messageSent.startsWith(Main.PREFIX + "joke")) {
-			Main.log("-> Command \">joke\" executed by " + event.getAuthor().getName());
+			Main.log("-> Command \">joke\" executed by " + event.getUser().getName());
 
-			int jokeIndex = (int) ((Math.random() * 100000) % jokes.length);
+			int jokeIndex = Integer.MAX_VALUE;
 
-			if (messageSent.split(" ").length == 2) {
+			if (event.getOption("id") != null) {
 				try {
-					jokeIndex = (Integer.parseInt(messageSent.split(" ")[1]) < jokes.length) ? Integer.parseInt(messageSent.split(" ")[1]) : jokeIndex;
+					jokeIndex = event.getOption("id").getAsInt();
 				} catch (Exception e) {
 				}
 			}
-			
+
+			if (jokeIndex <= 0 || jokeIndex > jokes.length) {
+				jokeIndex = (int) ((Math.random() * (jokes.length - 1)));
+			}
 
 			// Build embed
 			EmbedBuilder eb = new EmbedBuilder();
@@ -140,7 +145,7 @@ public class Joke extends ListenerAdapter {
 			MessageEmbed embed = eb.build();
 
 			// Queue the action for execution
-			event.getChannel().sendMessage(embed).queue();
+			event.getHook().sendMessageEmbeds(embed).queue();
 		}
 	}
 

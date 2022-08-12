@@ -6,11 +6,12 @@ import java.util.*;
 import javax.security.auth.login.LoginException;
 import net.dv8tion.jda.api.*;
 import net.dv8tion.jda.api.entities.*;
+import net.dv8tion.jda.api.interactions.commands.OptionType;
+import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 
 public class Main {
 
-	public static final char PREFIX = '>';
 	public static final long SERVER_ID = 767404002647343115L;
 	public static final long LOG_CHANNEL_ID = 887415187429265448L;
 	public static final long LAUNCH_TIME = System.currentTimeMillis();
@@ -26,19 +27,21 @@ public class Main {
 		out = new PrintWriter(new File("EventLogs.out"));
 
 		// Initialize JDA
-		JDA jda = JDABuilder.create(new Scanner(new File("token.txt")).nextLine(), 
+		JDA jda = JDABuilder.create(new Scanner(new File("token.txt")).nextLine(),
 				GatewayIntent.DIRECT_MESSAGES,
 				GatewayIntent.DIRECT_MESSAGE_REACTIONS,
-				GatewayIntent.DIRECT_MESSAGE_TYPING, 
+				GatewayIntent.DIRECT_MESSAGE_TYPING,
 				GatewayIntent.GUILD_BANS,
-				GatewayIntent.GUILD_EMOJIS, 
+				GatewayIntent.GUILD_EMOJIS_AND_STICKERS,
 				GatewayIntent.GUILD_INVITES,
 				GatewayIntent.GUILD_MEMBERS,
-				GatewayIntent.GUILD_MESSAGES, 
-				GatewayIntent.GUILD_MESSAGE_REACTIONS, 
-				GatewayIntent.GUILD_MESSAGE_TYPING, 
-				GatewayIntent.GUILD_PRESENCES, 
-				GatewayIntent.GUILD_VOICE_STATES).setActivity(Activity.playing("Ultimate Thumb Wrestling 2021")).build();
+				GatewayIntent.GUILD_MESSAGES,
+				GatewayIntent.GUILD_MESSAGE_REACTIONS,
+				GatewayIntent.GUILD_MESSAGE_TYPING,
+				GatewayIntent.GUILD_PRESENCES,
+				GatewayIntent.GUILD_VOICE_STATES,
+				GatewayIntent.GUILD_WEBHOOKS,
+				GatewayIntent.MESSAGE_CONTENT).setActivity(Activity.playing("Ultimate Thumb Wrestling 2021")).build();
 
 		// Await completion of connection to Discord servers
 		jda.awaitReady();
@@ -86,19 +89,33 @@ public class Main {
 			}
 		}
 
+		jda.updateCommands().addCommands(
+				Commands.slash("arabic", "Shows a list of common arabic phrases for easy copy-pasting"),
+				Commands.slash("help", "Shows a list of all of the commands"),
+				Commands.slash("host", "Displays where the bot is currently being run from"),
+				Commands.slash("joke", "Gives you an extremely cringey (most of the time) joke!")
+						.addOption(OptionType.STRING, "id", "(Optional) The ID of the joke you want", false),
+				Commands.slash("ping", "Returns a RestAction ping between the bot and the Discord servers"),
+				Commands.slash("systeminfo", "Displays general information about the system"),
+				Commands.slash("terminate", "Terminates the bot's code execution. Can only be run by system admins."),
+				Commands.slash("uptime", "Displays how long the bot has been running for"),
+				Commands.slash("verify", "Registers you as an official member of Muslim Gang!"),
+				Commands.slash("version", "Displays the current version of the bot")
+		).queue();
+
 		// Add event listeners
-		jda.addEventListener(new Help());
-		jda.addEventListener(new Verify());
 		jda.addEventListener(new Arabic());
-		jda.addEventListener(new Salams());
-		jda.addEventListener(new Joke());
-		jda.addEventListener(new Ping());
+		jda.addEventListener(new Help());
 		jda.addEventListener(new Host());
-		jda.addEventListener(new Version());
-		jda.addEventListener(new Uptime());
-		jda.addEventListener(new SystemInfo());
+		jda.addEventListener(new Joke());
 		jda.addEventListener(new Leave());
+		jda.addEventListener(new Ping());
+		jda.addEventListener(new Salams());
+		jda.addEventListener(new SystemInfo());
 		jda.addEventListener(new Terminate());
+		jda.addEventListener(new Uptime());
+		jda.addEventListener(new Verify());
+		jda.addEventListener(new Version());
 	}
 
 	public static void log(String message) {

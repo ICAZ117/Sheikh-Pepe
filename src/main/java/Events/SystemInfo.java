@@ -1,22 +1,23 @@
 package Events;
 
 import Main.Main;
-import java.util.*;
 import java.io.*;
 import java.awt.*;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 public class SystemInfo extends ListenerAdapter {
 
 	@Override
-	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
-		String messageSent = event.getMessage().getContentRaw();
+	public void onSlashCommandInteraction(SlashCommandInteractionEvent event) {
+		// Check the command type
+		if (event.getName().equals("systeminfo") && !event.getUser().isBot()) {
+			// Send waiting message
+			event.deferReply().queue();
 
-		if (messageSent.equals(Main.PREFIX + "systeminfo")) {
-			Main.log("-> Command \">systeminfo\" executed by " + event.getAuthor().getName());
+			Main.log("-> Command \">systeminfo\" executed by " + event.getUser().getName());
 
 			Runtime rpi = Runtime.getRuntime();
 			String[] commands = {"bash", "-c", "cpu=$(</sys/class/thermal/thermal_zone0/temp);echo \"$((cpu/1000))\";vcgencmd measure_temp"};
@@ -52,13 +53,13 @@ public class SystemInfo extends ListenerAdapter {
 			eb.setAuthor("System Information", null);
 
 			// Create fields in embed
-			eb.addField("CPU Temperature", String.format("%d°C", (int) cpu), true);
-			eb.addField("GPU Temperature", String.format("%d°C", (int) gpu), true);
+			eb.addField("CPU Temperature", String.format("%.2f°C", cpu), true);
+			eb.addField("GPU Temperature", String.format("%.2f°C", gpu), true);
 
 			// Create embed
 			MessageEmbed embed = eb.build();
 
-			event.getChannel().sendMessage(embed).queue();
+			event.getHook().sendMessageEmbeds(embed).queue();
 		}
 	}
 
